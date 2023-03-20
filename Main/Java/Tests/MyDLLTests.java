@@ -41,6 +41,12 @@ public class MyDLLTests {
         dll.clear();
     }
 
+    /**
+     * Test method for
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void TestInsertion() {
         dll = new DoublyLinkedList();
@@ -56,6 +62,12 @@ public class MyDLLTests {
         assert dll.tail.data == 20;
     }
 
+    /**
+     * Test method for
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testDeletion() {
         dll = new DoublyLinkedList();
@@ -75,11 +87,23 @@ public class MyDLLTests {
         assert dll.tail.data == 10;
     }
 
+    /**
+     * Test method for
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void isClear() {
         assert dll.size() == 0;
     }
 
+    /**
+     * Test method for
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testSize() {
         dll = new DoublyLinkedList();
@@ -92,6 +116,47 @@ public class MyDLLTests {
     /**
      * Test method for
      * @throws NullPointerException
+     *
+     * FAILS
+     */
+    @Test
+    public void testAddAll() {
+        dll = new DoublyLinkedList();
+        dll.insertAtEnd(10);
+        dll.insertAtEnd(20);
+        dll.insertAtEnd(30);
+
+        DoublyLinkedList dll2 = new DoublyLinkedList();
+        dll2.insertAtEnd(40);
+        dll2.insertAtEnd(50);
+
+        dll.addAll(dll2);
+
+        assert dll.size() == 5;
+
+    }
+
+    /**
+     * Test method for
+     * @throws IndexOutOfBoundsException
+     *
+     * FAILS
+     */
+    @Test
+    public void testGet() {
+        dll = new DoublyLinkedList();
+        dll.insertAtEnd(10);
+        dll.insertAtEnd(20);
+        dll.insertAtEnd(30);
+
+        assertEquals(10,dll.get(0));
+    }
+
+    /**
+     * Test method for
+     * @throws NullPointerException
+     *
+     * FAILS
      */
     @Test
     public void testToArray() {
@@ -109,6 +174,8 @@ public class MyDLLTests {
     /**
      * Test method for
      * @throws AssertionError
+     *
+     * FAILS
      */
     @Test
     public void testIterator() {
@@ -130,6 +197,8 @@ public class MyDLLTests {
     /**
      * Test method for
      * @throws NullPointerException
+     *
+     * FAILS
      */
     @Test
     public void testContains() {

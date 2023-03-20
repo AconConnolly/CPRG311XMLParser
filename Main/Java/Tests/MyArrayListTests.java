@@ -81,16 +81,6 @@ public class MyArrayListTests {
         assertTrue(testList.isEmpty());
     }
 
-//    /**
-//     * Test method for
-//     * @throws NullPointerException
-//     * @throws IndexOutOfBoundsException
-//     */
-//    @Test
-//    public void testAdd() {
-//
-//    }
-
     /**
      * Test method for
      * @throws NullPointerException
