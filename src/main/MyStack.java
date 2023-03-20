@@ -40,7 +40,9 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if(this.size == 0) {
+			return true;
+		} else 
 		return false;
 	}
 
@@ -58,8 +60,10 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return false;
+		for (int k = 0; k < stack.length - 1; k++) {
+			if ()
+		}
+		
 	}
 
 	@Override
@@ -82,8 +86,7 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.size;
 	}
 	
 }
