@@ -58,11 +58,25 @@ public class MyArrayList<T> implements ListADT, Iterator{
 
 	@Override
 	public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		//TODO write the code
-		//Im calling it for the night however just move stuff over tell you get to index then add the thing
-			
+		//TODO Add error Checking
+		if(toAdd == null) {
+			throw new NullPointerException("Value Added if Null");
+		}
+		if(this.size == this.array.length) {
+			Object[] biggerArray = new Object[this.array.length + 10];
+			for(Object theThing: this.array) {
+				int i = 0;
+				biggerArray[i] = theThing;
+			}
+			this.array = biggerArray;
+		}
+		for(int moveTo = this.size; moveTo > index; moveTo--) {
+			array[moveTo] = array[moveTo-1];
+		}
+		array[index] = toAdd;
+		size++;
 		
-		return false;
+		return true;
 	}
 
 	@Override
@@ -137,14 +151,16 @@ public class MyArrayList<T> implements ListADT, Iterator{
 		Object itsGone = null;
 		if(this.contains(toRemove)) {
 			int toFill = 0;
-			while(found = false) {
+			while(found == false) {
 				if(this.array[toFill] == toRemove){
 					found = true;
 					itsGone = array[toFill];
 					array[toFill] = null;
+					toFill--;
 				}
+				toFill++;
 			}
-			while(toFill<size-1){
+			while(toFill<size){
 				array[toFill] = array[toFill+1];
 				toFill++;
 			}
@@ -192,8 +208,11 @@ public class MyArrayList<T> implements ListADT, Iterator{
 
 	@Override
 	public Object[] toArray(Object[] toHold) throws NullPointerException {
-		//TODO make this stuff
-		return null;
+		//TODO add exceiption handling 
+		for(int i = 0; i < this.size; i++) {
+			toHold[i] = this.array[i];
+		}
+		return toHold;
 	}
 
 	@Override
