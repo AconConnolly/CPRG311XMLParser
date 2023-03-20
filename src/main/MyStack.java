@@ -38,7 +38,7 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public void clear() {
-		for(int k = 0; k < stack.length - 1; k++) {
+		for(int k = 0; k < this.size - 1; k++) {
 			stack[k] = null;
 		}		
 	}
@@ -53,8 +53,13 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object tempStack[] =  new Object[this.size];
+		
+		for (int k = 0; k < this.size - 1; k++) {
+			tempStack[k] = this.stack[k];
+		}
+		
+		return tempStack;
 	}
 
 	@Override
@@ -65,10 +70,11 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
-		for (int k = 0; k < stack.length - 1; k++) {
-			if ()
-		}
+		//for (int k = 0; k < stack.length - 1; k++) {
+		//	if ()
+		//}
 		
+		return false;
 	}
 
 	@Override
