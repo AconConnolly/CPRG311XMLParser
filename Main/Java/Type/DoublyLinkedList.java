@@ -15,7 +15,7 @@ public class DoublyLinkedList implements ListADT, Iterator {
         return null;
     }
 
-    public class Node {
+    public static class Node {
        public int data;
         Node previous;
         Node next;
@@ -198,7 +198,14 @@ public class DoublyLinkedList implements ListADT, Iterator {
 
     @Override
     public Object[] toArray(Object[] toHold) throws NullPointerException {
-        return new Object[0];
+        int i = 0;
+        Node current = new Node(this.size);
+        while (current.next != null) {
+            toHold[i] = current.data;
+            i++;
+            current = current.next;
+        }
+        return toHold;
     }
 
     @Override
