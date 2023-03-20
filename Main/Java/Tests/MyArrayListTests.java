@@ -226,14 +226,6 @@ public class MyArrayListTests {
 
     }
 
-//    /**
-//     * Test method for
-//     */
-//    @Test
-//    public void testToArray() {
-//
-//    }
-
     /**
      * Test method for
      * @throws AssertionError
