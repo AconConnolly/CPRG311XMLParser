@@ -22,20 +22,25 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public Object pop() throws EmptyStackException {
-		// TODO Auto-generated method stub
-		return null;
+		Object returnVal = stack[0];
+		
+		stack[0] = null;
+		
+		return returnVal;
 	}
 
 	@Override
 	public Object peek() throws EmptyStackException {
-		// TODO Auto-generated method stub
-		return null;
+		Object returnVal = stack[0];
+		
+		return returnVal;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		for(int k = 0; k < stack.length - 1; k++) {
+			stack[k] = null;
+		}		
 	}
 
 	@Override
