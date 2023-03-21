@@ -11,6 +11,7 @@ public class MyArrayList<T> implements ListADT{
 
 	int size;
 	Object[] array;
+	
 	public MyArrayList(){
 		size = 0;
 		final int default_size = 10;
@@ -18,11 +19,19 @@ public class MyArrayList<T> implements ListADT{
 		
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return The size of the array list
+	 */
 	@Override
 	public int size() {
 		return this.size;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void clear() {
 		int i = 0;
@@ -36,6 +45,11 @@ public class MyArrayList<T> implements ListADT{
 		
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return 
+	 */
 	@Override
 	public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
 		if(toAdd == null) {
@@ -62,6 +76,11 @@ public class MyArrayList<T> implements ListADT{
 		return true;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public boolean add(Object toAdd) throws NullPointerException {
 		if(toAdd == null) {
@@ -86,6 +105,11 @@ public class MyArrayList<T> implements ListADT{
 		return true;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public boolean addAll(ListADT toAdd) throws NullPointerException {
 		if(toAdd == null) {
@@ -104,6 +128,11 @@ public class MyArrayList<T> implements ListADT{
 		return true;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public Object get(int index) throws IndexOutOfBoundsException {
 		if(index > size) {
@@ -112,6 +141,11 @@ public class MyArrayList<T> implements ListADT{
 		return this.array[index];
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public Object remove(int index) throws IndexOutOfBoundsException {
 		if(index > size) {
@@ -137,6 +171,11 @@ public class MyArrayList<T> implements ListADT{
 		return whatWasRemoved;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public Object remove(Object toRemove) throws NullPointerException {
 		boolean found = false;
@@ -164,6 +203,11 @@ public class MyArrayList<T> implements ListADT{
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
 		if(toChange == null) {
@@ -176,6 +220,11 @@ public class MyArrayList<T> implements ListADT{
 		return null;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public boolean isEmpty() {
 		if(this.size == 0) {
@@ -185,6 +234,11 @@ public class MyArrayList<T> implements ListADT{
 		return false;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
 		boolean found = false;
@@ -201,7 +255,11 @@ public class MyArrayList<T> implements ListADT{
 		}
 	}
 		
-
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public Object[] toArray(Object[] toHold) throws NullPointerException {
 		if(toHold == null) {
@@ -213,6 +271,11 @@ public class MyArrayList<T> implements ListADT{
 		return toHold;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public Object[] toArray() {
 		Object[] theArray = new Object[this.size];
@@ -223,6 +286,11 @@ public class MyArrayList<T> implements ListADT{
 		return theArray;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	@Override
 	public utilities.Iterator iterator() {
 		  return new Iterator(this.array);
@@ -232,14 +300,21 @@ public class MyArrayList<T> implements ListADT{
 
 		int cursor;
 		Object [] theArray;
-			Iterator(Object[] array){
-				cursor = -1;
-				theArray = new Object[array.length];
-				
-				for(int i = 0; i<(array.length); i++) {
-					theArray[i] = array[i];
-				}
+		
+		Iterator(Object[] array){
+			cursor = -1;
+			theArray = new Object[array.length];
+			
+			for(int i = 0; i<(array.length); i++) {
+				theArray[i] = array[i];
 			}
+		}
+			
+		/**
+		 * 
+		 * 
+		 * @return
+		 */
 		@Override
 		public boolean hasNext() {
 			if(this.cursor < size) {
@@ -250,6 +325,11 @@ public class MyArrayList<T> implements ListADT{
 			}
 		}
 
+		/**
+		 * 
+		 * 
+		 * @return
+		 */
 		@Override
 		public Object next() throws NoSuchElementException {
 			this.cursor++;
