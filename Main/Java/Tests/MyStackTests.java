@@ -187,17 +187,6 @@ public class MyStackTests {
         assertFalse(ir.hasNext());
     }
 
-//    /**
-//     * Test method for trying to add to a stack that does not have space.
-//     * @throws StackOverflowError
-//     */
-//    @Test
-//    public void testPushStackFull() {
-//        Stack<Integer> testStack = new Stack<>(2);
-//        testStack.push(1);
-//        testStack.push(2);
-//        testStack.push(3);
-//    }
 
     /**
      * Error when trying to pop an empty stack

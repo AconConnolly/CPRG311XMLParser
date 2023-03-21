@@ -128,6 +128,7 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
         }
     }
 
+    //Specific location in the list
     @Override
     public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
         return false;
@@ -141,6 +142,8 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
     public Object next() {
         return null;
     }
+
+    //At the end
     @Override
     public boolean add(Object toAdd) throws NullPointerException {
         return false;
@@ -174,11 +177,13 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
         return current.data;
     }
 
+    //Remove at specific index
     @Override
     public Object remove(int index) throws IndexOutOfBoundsException {
         return null;
     }
 
+    //Search for and remove an object
     @Override
     public Object remove(Object toRemove) throws NullPointerException {
         return null;
@@ -220,6 +225,7 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
         }
         return false;
     }
+
 
     @Override
     public Object[] toArray(Object[] toHold) throws NullPointerException {
