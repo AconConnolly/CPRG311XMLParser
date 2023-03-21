@@ -91,9 +91,9 @@ public class MyStack<E> implements StackADT {
 	}
 
 	/**
-	 * Method
+	 * Method to get all the values in a stack
 	 * 
-	 * @return The array containing the stack values
+	 * @return The array containing the stack values in order
 	 */
 	@Override
 	public Object[] toArray() {
@@ -104,7 +104,9 @@ public class MyStack<E> implements StackADT {
 	 * Method
 	 * 
 	 * @param holder ff
-	 * @return The array containing the stack values
+	 * @return The array containing the stack values in order
+	 * 
+	 * @exception NullPointerException
 	 */
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
@@ -112,10 +114,12 @@ public class MyStack<E> implements StackADT {
 	}
 
 	/**
-	 * Method
+	 * Method to check if an object exists in a stack
 	 * 
-	 * @param toFind
+	 * @param toFind The value of the object to check
 	 * @return The value to check if the stack contains the object or not
+	 * 
+	 * @exception NullPointerException
 	 */
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
@@ -128,9 +132,10 @@ public class MyStack<E> implements StackADT {
 	}
 
 	/**
+	 * Method to find the position of a specific object in a stack
 	 * 
-	 * @param
-	 * @return
+	 * @param toFind The value of the object to find
+	 * @return The position of the object in the stack
 	 */
 	@Override
 	public int search(Object toFind) {
@@ -139,9 +144,10 @@ public class MyStack<E> implements StackADT {
 	}
 	
 	/**
+	 * Method to check if two stacks are equal in depth
 	 * 
-	 * @param
-	 * @return
+	 * @param that
+	 * @return The value to check if the stacks are in equal depth
 	 */
 	@Override
 	public boolean equals(StackADT that) {
@@ -150,9 +156,9 @@ public class MyStack<E> implements StackADT {
 	}
 	
 	/**
+	 * Method to return the depth of a stack
 	 * 
-	 * 
-	 * @return The size
+	 * @return The depth size
 	 */
 	@Override
 	public int size() {
@@ -202,6 +208,8 @@ public class MyStack<E> implements StackADT {
 		/**
 		 * 
 		 * @return
+		 * 
+		 * @exception NoSuchElementException
 		 */
 		@Override
 		public Object next() throws NoSuchElementException {

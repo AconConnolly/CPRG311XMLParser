@@ -20,7 +20,7 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
-	 * 
+	 * Method to return the size of the array
 	 * 
 	 * @return The size of the array list
 	 */
@@ -30,7 +30,7 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
-	 * 
+	 * Method to remove all data inside the array
 	 */
 	@Override
 	public void clear() {
@@ -46,9 +46,15 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to add an object into the array list at a specific index
 	 * 
+	 * @param index The position of where the object will be added in the list
+	 * @param toAdd The value of object to add
 	 * 
-	 * @return 
+	 * @return
+	 * 
+	 * @exception NullPointerException
+	 * @exception IndexOutOfBoundsException
 	 */
 	@Override
 	public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
@@ -77,9 +83,13 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to add an object into the array list
 	 * 
+	 * @param toAdd The value of object to add
 	 * 
 	 * @return
+	 * 
+	 * @exception NullPointerException
 	 */
 	@Override
 	public boolean add(Object toAdd) throws NullPointerException {
@@ -106,7 +116,9 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method
 	 * 
+	 * @param toAdd
 	 * 
 	 * @return
 	 */
@@ -129,9 +141,13 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to get the value of the object in the array list at a specific index
 	 * 
+	 * @param index The position in the list
 	 * 
-	 * @return
+	 * @return The value of the object to get
+	 * 
+	 * @exception IndexOutOfBoundsException
 	 */
 	@Override
 	public Object get(int index) throws IndexOutOfBoundsException {
@@ -142,9 +158,13 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to remove an object in the array list at a specific position
 	 * 
+	 * @param index The position in the list
 	 * 
-	 * @return
+	 * @return The value of the object to remove
+	 * 
+	 * @exception IndexOutOfBoundsException
 	 */
 	@Override
 	public Object remove(int index) throws IndexOutOfBoundsException {
@@ -172,9 +192,13 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to remove an object in the array list with a specific object value
 	 * 
+	 * @param toRemove The value of the object to be removed
 	 * 
-	 * @return
+	 * @return The value of the object to remove
+	 * 
+	 * @exception NullPointerException
 	 */
 	@Override
 	public Object remove(Object toRemove) throws NullPointerException {
@@ -204,9 +228,12 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
-	 * 
+	 * Method to 
 	 * 
 	 * @return
+	 * 
+	 * @exception NullPointerException
+	 * @exception IndexOutOfBoundsException 
 	 */
 	@Override
 	public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
@@ -221,9 +248,9 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to check if a stack is empty or not 
 	 * 
-	 * 
-	 * @return
+	 * @return The value to check if the stack is empty or not
 	 */
 	@Override
 	public boolean isEmpty() {
@@ -235,9 +262,13 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to check if an object exists in the list
 	 * 
+	 * @param toFind The value of the object to check
 	 * 
-	 * @return
+	 * @return The value to check if the stack contains the object or not
+	 * 
+	 * @exception NullPointerException
 	 */
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
@@ -256,9 +287,12 @@ public class MyArrayList<T> implements ListADT{
 	}
 		
 	/**
+	 * Method
 	 * 
+	 * @param toHold ff
+	 * @return The array containing the list values in order
 	 * 
-	 * @return
+	 * @exception NullPointerException
 	 */
 	@Override
 	public Object[] toArray(Object[] toHold) throws NullPointerException {
@@ -272,9 +306,9 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to get all the values in the list
 	 * 
-	 * 
-	 * @return
+	 * @return The array containing the list values in order
 	 */
 	@Override
 	public Object[] toArray() {
@@ -329,6 +363,8 @@ public class MyArrayList<T> implements ListADT{
 		 * 
 		 * 
 		 * @return
+		 * 
+		 * @exception NoSuchElementException
 		 */
 		@Override
 		public Object next() throws NoSuchElementException {
