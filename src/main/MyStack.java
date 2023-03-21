@@ -14,8 +14,12 @@ import main.MyArrayList;
 public class MyStack<E> implements StackADT, Iterator {
 	
 	int depth;
-	Object[] stack;
+	MyArrayList stack;
 
+	public MyStack() {
+		depth = 0;
+		stack = new MyArrayList();
+	}
 	@Override
 	public void push(Object toAdd) throws NullPointerException {
 		//Object tempArray = new Object [this.size + 1];
@@ -36,8 +40,9 @@ public class MyStack<E> implements StackADT, Iterator {
 		return returnVal;
 		*/
 		
-		MyArrayList.get(0);
-		MyArrayList.remove(0);
+		stack.get(0);
+		stack.remove(0);
+		return null;
 	}
 
 	@Override
@@ -47,7 +52,8 @@ public class MyStack<E> implements StackADT, Iterator {
 		
 		return returnVal;
 		*/
-		MyArrayList.get(0);
+		stack.get(0);
+		return null;
 		
 	}
 
@@ -58,13 +64,14 @@ public class MyStack<E> implements StackADT, Iterator {
 			stack[k] = null;
 		}		
 		*/
-		MyArrayList.clear();
+		stack.clear();
 		
 	}
 
 	@Override
 	public boolean isEmpty() {
-		MyArrayList.isEmpty();
+		stack.isEmpty();
+		return false;
 	}
 
 	@Override
@@ -77,12 +84,13 @@ public class MyStack<E> implements StackADT, Iterator {
 		}
 		*/
 		
-		return MyArrayList.toArray();
+		return stack.toArray();
+		
 	}
 
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
-		return MyArrayList.toArray(holder);;
+		return stack.toArray(holder);
 	}
 
 	@Override
@@ -90,7 +98,7 @@ public class MyStack<E> implements StackADT, Iterator {
 		//for (int k = 0; k < stack.length - 1; k++) {
 		//	if ()
 		//}
-		return MyArrayList.contains(toFind);
+		return stack.contains(toFind);
 	}
 
 	@Override
@@ -114,6 +122,18 @@ public class MyStack<E> implements StackADT, Iterator {
 	@Override
 	public int size() {
 		return this.depth;
+	}
+
+	@Override
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Object next() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
