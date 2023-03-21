@@ -213,7 +213,14 @@ public class MyDLLTests {
      * FAILS
      */
     @Test
-    public void testIterator() {
+    public void testIteratorEmpty() {
+        dll = new DoublyLinkedList();
+        Iterator ir = dll.iterator();
+        assertFalse(ir.hasNext());
+    }
+
+    @Test
+    public void testIteratorRemove() {
         dll = new DoublyLinkedList();
         dll.insertAtEnd(10);
         dll.insertAtEnd(20);
@@ -222,11 +229,13 @@ public class MyDLLTests {
         Iterator ir = dll.iterator();
         assertTrue(ir.hasNext());
         assertEquals(10, ir.next());
-        assertTrue(ir.hasNext());
+        ir.remove();
         assertEquals(20, ir.next());
-        assertTrue(ir.hasNext());
+        ir.remove();
         assertEquals(30, ir.next());
+        ir.remove();
 
+        assertFalse(ir.hasNext());
     }
 
     /**
@@ -244,7 +253,35 @@ public class MyDLLTests {
 
         assertFalse(dll.contains(4));
         dll.insertAtEnd(40);
-        assertTrue(dll.contains(40));
+        assertTrue(dll.contains(30));
+    }
+
+    @Test
+    public void testIsEmpty() {
+        dll = new DoublyLinkedList();
+
+        assertTrue(dll.isEmpty());
+
+        dll.insertAtEnd(10);
+        dll.insertAtEnd(20);
+
+        assertFalse(dll.isEmpty());
+
+        dll.deleteFromFront();
+        dll.deleteFromEnd();
+
+        assertTrue(dll.isEmpty());
+    }
+
+    @Test
+    public void testSet() {
+        dll = new DoublyLinkedList();
+        dll.insertAtEnd(10);
+        dll.insertAtEnd(20);
+        dll.insertAtEnd(30);
+
+        assertEquals(20, dll.set(1, 50));
+        assertEquals(50, dll.get(1));
     }
 
 

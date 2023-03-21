@@ -3,6 +3,7 @@ package Type;
 import ADTs.ListADT;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class DoublyLinkedList <T> implements ListADT, Iterator {
     public static class Node<T> {
@@ -185,16 +186,38 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
 
     @Override
     public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
-        return null;
+        if (toChange == null) {
+            throw new NullPointerException("Cannot set null value");
+        }
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+        }
+        Node current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        Object oldValue = current.data;
+        current.data = toChange;
+        return oldValue;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return head == null;
     }
 
     @Override
     public boolean contains(Object toFind) throws NullPointerException {
+        if (toFind == null) {
+            throw new NullPointerException("Cannot search for null value.");
+        }
+        Node<T> current = head;
+        while (current != null) {
+            if (current.data.equals(toFind)) {
+                return true;
+            }
+            current = current.next;
+        }
         return false;
     }
 
@@ -223,8 +246,50 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
 
 
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator<T> iterator() {
+        return new DLLIterator();
+    }
+    private class DLLIterator implements Iterator<T> {
+        private Node<T> current = head;
+        private Node<T> last = null;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T data = current.data;
+            last = current;
+            current = current.next;
+            return data;
+        }
+
+        @Override
+        public void remove() {
+            if (last == null) {
+                throw new IllegalStateException();
+            }
+            if (last.previous == null) {
+                head = last.next;
+                if (head != null) {
+                    head.previous = null;
+                } else {
+                    tail = null;
+                }
+            } else if (last.next == null) {
+                tail = last.previous;
+                tail.next = null;
+            } else {
+                last.previous.next = last.next;
+                last.next.previous = last.previous;
+            }
+            size--;
+            last = null;
+        }
     }
 }
 
