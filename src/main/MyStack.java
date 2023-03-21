@@ -16,7 +16,11 @@ public class MyStack<E> implements StackADT, Iterator {
 
 	@Override
 	public void push(Object toAdd) throws NullPointerException {
-		// TODO Auto-generated method stub
+		//Object tempArray = new Object [this.size + 1];
+		
+		//for (int k  = this.size + 1; k > 0; k--) {
+		//	tempArray[k] = stack[k];
+		//}
 		
 	}
 
