@@ -4,55 +4,25 @@ import ADTs.ListADT;
 
 import java.util.Iterator;
 
-public class DoublyLinkedList implements ListADT, Iterator {
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
+public class DoublyLinkedList <T> implements ListADT, Iterator {
+    public static class Node<T> {
+        private T data;
+        private Node <T> previous;
+        private Node <T> next;
 
-    @Override
-    public Object next() {
-        return null;
-    }
-
-    public static class Node {
-       public int data;
-        Node previous;
-        Node next;
-
-        public Node(int data) {
+        public Node(T data) {
             this.data = data;
-            this.previous = null;
-            this.next = null;
+        }
+        public Node() {
+        }
+
+        public T getData() {
+            return data;
         }
     }
 
-    public Node getHead() {
-        return head;
-    }
-
-    public void setHead(Node head) {
-        this.head = head;
-    }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public void setTail(Node tail) {
-        this.tail = tail;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public Node head;
-    public Node tail;
+    public Node<T> head;
+    public Node<T> tail;
     int size;
 
     public DoublyLinkedList() {
@@ -62,15 +32,15 @@ public class DoublyLinkedList implements ListADT, Iterator {
     }
 
 
+
     /*
     This method inserts a new node at the end of the list. If empty, it will create a new node and ake the head and tail node.
     If the list is not empty, it creates a previous node and sets its previous node to the tail node, and the tails next node to current node.
     */
-    public void insertAtEnd(int data) {
-        Node newNode = new Node(data);
+    public void insertAtEnd(T data) {
+        Node<T> newNode = new Node<T>(data);
         if (head == null) {
-            head = newNode;
-            tail = newNode;
+            head = tail = newNode;
         } else {
             tail.next = newNode;
             newNode.previous = tail;
@@ -79,32 +49,65 @@ public class DoublyLinkedList implements ListADT, Iterator {
         size++;
     }
 
+    public void insertAtFront(T data) {
+        Node<T> newNode = new Node<T>();
+        newNode.data = data;
+        if (head == null) {
+            tail = newNode;
+        } else {
+            head.previous = newNode;
+            newNode.next = head;
+        }
+        head = newNode;
+        size++;
+    }
+
     /*
     Deletes the last node of the list. If the list is empty, it will return null. If only one node, both head and tail will be set to null.
     IF more than one, it will delete the tail node and update the tail pointer to the previous node, and sets the previous node's pointer to null.
      */
-    public Node deleteFromEnd() {
-        if (head == null) {
+    public Node<T> deleteFromEnd() {
+        if (tail == null) {
             return null;
-        } else if (head == tail) {
-            Node temp = head;
-            head = null;
-            tail = null;
-            size--;
-            return temp;
         } else {
-            Node temp = tail;
-            tail = tail.previous;
-            tail.next = null;
+            Node<T> deletedNode = tail;
+
+            if (tail.previous == null) { // Only one element in the list
+                head = null;
+                tail = null;
+            } else {
+                tail = tail.previous;
+                tail.next = null;
+            }
+
             size--;
-            return temp;
+            return deletedNode;
         }
     }
+    public Node<T> deleteFromFront() {
+        if (head == null) {
+            return null;
+        } else {
+            Node<T> deletedNode = head;
+
+            if (head.next == null) { // Only one element in the list
+                head = null;
+                tail = null;
+            } else {
+                head = head.next;
+                head.previous = null;
+            }
+
+            size--;
+            return deletedNode;
+        }
+    }
+
     /*
     Method traverses the list from the head node and prints the data of each node.
      */
     public void printList() {
-        Node current = head;
+        Node<T> current = head;
         while (current != null) {
             System.out.println(current.data + " ");
             current = current.next;
@@ -112,39 +115,12 @@ public class DoublyLinkedList implements ListADT, Iterator {
         System.out.println();
     }
 
-
-    public void addNode(int data) {
-        Node newNode = new Node(data);
-
-        if (head == null) {
-            head = tail = newNode;
-            head.previous = null;
-            tail.next = null;
-        } else {
-            tail.next = newNode;
-            newNode.previous = tail;
-            tail = newNode;
-            tail.next = null;
-        }
-    }
-
     public int size() {
         return size;
     }
 
-    public void addIntoHead(int data) {
-        Node newNode = new Node(data);
-
-        if (head == null) {
-            head = newNode;
-        } else {
-            head.previous = newNode;
-            newNode.next = head;
-            head = newNode;
-        }
-    }
     public void clear() {
-        Node current = tail;
+        Node<T> current = tail;
         while (current != null) {
             current = tail.previous;
             deleteFromEnd();
@@ -155,7 +131,15 @@ public class DoublyLinkedList implements ListADT, Iterator {
     public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
         return false;
     }
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
 
+    @Override
+    public Object next() {
+        return null;
+    }
     @Override
     public boolean add(Object toAdd) throws NullPointerException {
         return false;
@@ -166,9 +150,27 @@ public class DoublyLinkedList implements ListADT, Iterator {
         return false;
     }
 
+    public void addAll(DoublyLinkedList<T> otherList) {
+        Node<T> currentNode = otherList.head;
+        while (currentNode != null) {
+            insertAtEnd(currentNode.getData());
+            currentNode = currentNode.next;
+        }
+    }
+
     @Override
-    public Object get(int index) throws IndexOutOfBoundsException {
-        return null;
+    public T get(int index) {
+        if (head == null) {
+            return null;
+        }
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            if (current.next == null) {
+                return null;
+            }
+            current = current.next;
+        }
+        return current.data;
     }
 
     @Override
@@ -198,20 +200,27 @@ public class DoublyLinkedList implements ListADT, Iterator {
 
     @Override
     public Object[] toArray(Object[] toHold) throws NullPointerException {
-        int i = 0;
-        Node current = new Node(this.size);
-        while (current.next != null) {
-            toHold[i] = current.data;
-            i++;
-            current = current.next;
-        }
-        return toHold;
+        return new Object[0];
     }
 
     @Override
-    public Object[] toArray() {
+    public T[] toArray() {
+        @SuppressWarnings("unchecked")
+        T[] array = (T[]) new Object[size];
+        Node<T> current = head;
+        int i = 0;
+        while (current != null) {
+            array[i++] = current.data;
+            current = current.next;
+        }
+        return array;
+    }
+
+    @Override
+    public Object[] toArrayAll() {
         return new Object[0];
     }
+
 
     @Override
     public Iterator iterator() {

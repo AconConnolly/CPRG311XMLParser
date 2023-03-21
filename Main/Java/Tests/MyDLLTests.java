@@ -6,7 +6,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
@@ -43,49 +42,81 @@ public class MyDLLTests {
     }
 
     /**
-     * Test method for
+     * Test method for whether the code can insert en element into the end of the Doubly Linked List
      * @throws NullPointerException
      *
      * PASSES
      */
     @Test
-    public void TestInsertion() {
-        dll = new DoublyLinkedList();
-        dll.insertAtEnd(10);
+    public void testInsertAtEnd() {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
 
-        assert dll.size() == 1;
-        assert dll.head.data == 10;
-        assert dll.tail.data == 10;
+        // Test inserting one element
+        list.insertAtEnd("A");
+        assertEquals(1, list.size());
+        assertEquals("A", list.get(0));
 
-        dll.insertAtEnd(20);
-        assert dll.size() == 2;
-        assert dll.head.data == 10;
-        assert dll.tail.data == 20;
+        // Test inserting multiple elements
+        list.insertAtEnd("B");
+        list.insertAtEnd("C");
+        assertEquals(3, list.size());
+        assertEquals("A", list.get(0));
+        assertEquals("B", list.get(1));
+        assertEquals("C", list.get(2));
     }
 
     /**
-     * Test method for
+     * Test method for whether the code can insert en element into the beginning
+     * of the Doubly Linked List
      * @throws NullPointerException
      *
      * PASSES
      */
     @Test
-    public void testDeletion() {
-        dll = new DoublyLinkedList();
+    public void TestInsertionAtFront() {
+        DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
+        dll.insertAtEnd(10);
+        dll.insertAtFront(40);
+
+        assertEquals(Integer.valueOf(40), dll.get(0));
+    }
+
+    /**
+     * Test method for whether the code can successfully delete from the end of the list
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
+    @Test
+    public void testDeleteFromEnd() {
+        DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
         dll.insertAtEnd(10);
         dll.insertAtEnd(20);
         dll.insertAtEnd(30);
-        assert dll.size() == 3;
+        assertEquals(3, dll.size());
+        dll.deleteFromEnd();
 
-        DoublyLinkedList.Node deleteNode = dll.deleteFromEnd();
-        assert deleteNode.data == 30;
-        assert dll.size() == 2;
-        assert dll.tail.data == 20;
+        assertEquals(Integer.valueOf(20), dll.tail.getData());
+    }
 
-        deleteNode = dll.deleteFromEnd();
-        assert deleteNode.data == 20;
-        assert dll.size() == 1;
-        assert dll.tail.data == 10;
+    /**
+     * Test method for whether the code can successfully delete from the front of the list
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
+    @Test
+    public void testDeleteFromFront() {
+        DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
+        dll.insertAtEnd(10);
+        dll.insertAtEnd(20);
+        dll.insertAtEnd(30);
+        assertEquals(3, dll.size());
+
+        dll.deleteFromFront();
+
+        assertEquals(Integer.valueOf(20), dll.head.getData());
+        assertEquals(2, dll.size());
     }
 
     /**
@@ -96,7 +127,10 @@ public class MyDLLTests {
      */
     @Test
     public void isClear() {
+        dll = new DoublyLinkedList();
+        dll.clear();
         assert dll.size() == 0;
+        assertEquals(0, dll.size());
     }
 
     /**
@@ -150,7 +184,10 @@ public class MyDLLTests {
         dll.insertAtEnd(20);
         dll.insertAtEnd(30);
 
-        assertEquals(10,dll.get(0));
+        assertEquals(10, (int) dll.get(0));
+        assertEquals(20, (int) dll.get(1));
+        assertEquals(30, (int) dll.get(2));
+        assertNull(dll.get(3));
     }
 
     /**
@@ -165,14 +202,10 @@ public class MyDLLTests {
         dll.insertAtEnd(10);
         dll.insertAtEnd(20);
         dll.insertAtEnd(30);
-
-        Object[] testArray = dll.toArray();
-        System.out.println(Arrays.toString(testArray));
-        assertEquals(3, testArray.length);
-        assertEquals(10, testArray[0]);
-        assertEquals(20, testArray[1]);
-
+        Object[] expected = {10,20,30};
+        assertArrayEquals(expected,dll.toArray());
     }
+
     /**
      * Test method for
      * @throws AssertionError

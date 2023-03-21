@@ -212,6 +212,11 @@ public class MyArrayList<T> implements ListADT, Iterator{
     }
 
     @Override
+    public Object[] toArrayAll() {
+        return new Object[0];
+    }
+
+    @Override
     public Object[] toArray() {
         Object[] theArray = new Object[this.size];
         for(int i = 0; i < this.size; i++) {

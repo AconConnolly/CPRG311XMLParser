@@ -212,8 +212,10 @@ public interface ListADT<E> extends Serializable
      * @return An array containing all of the elements in this list in proper
      * 			sequence.
      */
-    public Object[] toArray();
+    public Object[] toArrayAll();
 
+
+    Object[] toArray();
 
     /**
      * Returns an iterator over the elements in this list, in proper sequence.
