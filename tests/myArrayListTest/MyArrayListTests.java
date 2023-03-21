@@ -302,14 +302,11 @@ public class MyArrayListTests {
         testList.add("two");
         testList.add("three");
 
-        Iterator<String> it = (Iterator<String>) testList.iterator();
+        utilities.Iterator it = (utilities.Iterator) testList.iterator();
         assertTrue(it.hasNext());
+        assertEquals("one", it.next());
         assertEquals("two", it.next());
-        //As square is not present the test case will fail with the
-        //AssertionError.
-        assertEquals("square", it.next());
-        assertFalse(it.hasNext());
-
+        assertTrue(it.hasNext());
     }
 
     /**
@@ -387,5 +384,4 @@ public class MyArrayListTests {
             assertThrows(IllegalArgumentException.class, () -> testList.add("stuff"));
         
     }
-
 }

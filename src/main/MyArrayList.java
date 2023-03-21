@@ -2,40 +2,20 @@ package main;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-
+import java.util.NoSuchElementException;
 
 import utilities.ListADT;
 
-public class MyArrayList<T> implements ListADT, Iterator{
+public class MyArrayList<T> implements ListADT{
 
 	int size;
 	Object[] array;
-	int cursor;
 	public MyArrayList(){
 		size = 0;
 		final int default_size = 10;
 		array = new Object[10];
-		cursor = 0;
 		
-	}
-
-
-	@Override
-	public boolean hasNext() {
-		if(this.cursor < size) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	@Override
-	public Object next() {
-		this.cursor++;
-		return this.get(cursor);
 	}
 
 	@Override
@@ -58,15 +38,18 @@ public class MyArrayList<T> implements ListADT, Iterator{
 
 	@Override
 	public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		//TODO Add error Checking
 		if(toAdd == null) {
 			throw new NullPointerException("Value Added if Null");
 		}
+		if(index > size) {
+			throw new IndexOutOfBoundsException("This index is out of bounce");
+		}
 		if(this.size == this.array.length) {
 			Object[] biggerArray = new Object[this.array.length + 10];
+			int i = 0;
 			for(Object theThing: this.array) {
-				int i = 0;
 				biggerArray[i] = theThing;
+				i++;
 			}
 			this.array = biggerArray;
 		}
@@ -91,9 +74,10 @@ public class MyArrayList<T> implements ListADT, Iterator{
 		}
 		if(this.size == this.array.length) {
 			Object[] biggerArray = new Object[this.array.length + 10];
+			int i = 0;
 			for(Object theThing: this.array) {
-				int i = 0;
 				biggerArray[i] = theThing;
+				i++;
 			}
 			this.array = biggerArray;
 		}
@@ -104,12 +88,20 @@ public class MyArrayList<T> implements ListADT, Iterator{
 
 	@Override
 	public boolean addAll(ListADT toAdd) throws NullPointerException {
-		//TODO figure out if it needs to stay at ListADT
 		if(toAdd == null) {
 			throw new NullPointerException();
 		}
-		while(true) //uyhguo y
-		return false;
+		utilities.Iterator stuff = toAdd.iterator();
+		while(stuff.hasNext()) {
+			Object o = stuff.next();
+			if(o == null) {
+				
+			}
+			else {
+				this.add(o);
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -174,8 +166,12 @@ public class MyArrayList<T> implements ListADT, Iterator{
 
 	@Override
 	public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
-		//What is this suppose to be returning???
-		//Also I think I need to add in checks for the other stuff
+		if(toChange == null) {
+			throw new NullPointerException();
+		}
+		if(index > size) {
+			throw new IndexOutOfBoundsException("This index is out of bounce");
+		}
 		this.array[index] = toChange;
 		return null;
 	}
@@ -208,7 +204,9 @@ public class MyArrayList<T> implements ListADT, Iterator{
 
 	@Override
 	public Object[] toArray(Object[] toHold) throws NullPointerException {
-		//TODO add exceiption handling 
+		if(toHold == null) {
+			throw new NullPointerException();
+		}
 		for(int i = 0; i < this.size; i++) {
 			toHold[i] = this.array[i];
 		}
@@ -227,7 +225,36 @@ public class MyArrayList<T> implements ListADT, Iterator{
 
 	@Override
 	public utilities.Iterator iterator() {
-		  //return new utilities.Iterator(this);
-		return null;
+		  return new Iterator(this.array);
+	}
+	
+	class Iterator implements utilities.Iterator{
+
+		int cursor;
+		Object [] theArray;
+			Iterator(Object[] array){
+				cursor = -1;
+				theArray = new Object[array.length];
+				
+				for(int i = 0; i<(array.length); i++) {
+					theArray[i] = array[i];
+				}
+			}
+		@Override
+		public boolean hasNext() {
+			if(this.cursor < size) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		@Override
+		public Object next() throws NoSuchElementException {
+			this.cursor++;
+			return theArray[cursor];
+		}
+		
 	}
 }
