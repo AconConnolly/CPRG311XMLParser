@@ -1,5 +1,7 @@
 package exceptions;
 
 public class EmptyQueueException extends Exception {
-	//TODO make this stuff
+	public EmptyQueueException() {
+		super("This Queue is Empty");
+	}
 }
