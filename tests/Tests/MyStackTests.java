@@ -180,14 +180,13 @@ public class MyStackTests {
         testStack.push(2);
         testStack.push(3);
 
-        //Not sure if this is the proper way to do this
-        Iterator<Integer> ir = (Iterator<Integer>) testStack.iterator();
+        utilities.Iterator ir = testStack.iterator();
         assertTrue(ir.hasNext());
-        assertEquals(Integer.valueOf(1), ir.next());
+        assertEquals(Integer.valueOf(3), ir.next());
         assertTrue(ir.hasNext());
         assertEquals(Integer.valueOf(2), ir.next());
         assertTrue(ir.hasNext());
-        assertEquals(Integer.valueOf(3), ir.next());
+        assertEquals(Integer.valueOf(1), ir.next());
         assertFalse(ir.hasNext());
     }
 
