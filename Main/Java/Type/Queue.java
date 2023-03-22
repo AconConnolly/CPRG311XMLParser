@@ -1,151 +1,153 @@
 package Type;
 
-import ADTs.QueueADT;
-
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Queue<E> implements QueueADT, Iterator {
-    int size = 5;
-    int[] items = new int[size];
-    int beg, end;
+import ADTs.QueueADT;
+import utilities.DoublyLinkedList;
+import utilities.DoublyLinkedList.*;
+import exceptions.EmptyQueueException;
 
-    Queue() {
-        beg = -1;
-        end = -1;
-    }
-    //Optional method if the queue is a fixed size
-    boolean fullList() {
-        return beg == 0 && end == size - 1;
-    }
+@SuppressWarnings({ "serial", "rawtypes" })
+public class MyQueue<E> implements QueueADT{
+	
+	int size;
+	Node head;
+	Node tail;
+	Node next;
+	DoublyLinkedList dll = new DoublyLinkedList();
+	
+	public MyQueue(int s) {
+		this.size = s;
+	}
 
-    void insertInto (int elements) {
-        if (fullList()) {
-            System.out.println("The queue is full");
-        } else {
-            if (beg == -1) {
-                beg = 0;
+	@SuppressWarnings("unchecked")
+	@Override
+	public void enqueue(Object toAdd) throws NullPointerException {
+		if (toAdd == null) {
+			throw new NullPointerException();
+		} else {
+			if (this.isFull()) {
+				System.out.println("Queue is full");
+			}else {
+				dll.insertAtEnd(toAdd);
+			}
+		}
+	}
+
+	@Override
+	public Object dequeue() throws EmptyQueueException {
+		if (this.isEmpty()) {
+			throw new EmptyQueueException();
+		} else {
+			return dll.deleteFromFront().data;
+		}
+	}
+
+	@Override
+	public Object peek() throws EmptyQueueException {
+		return head.data;
+	}
+
+	@Override
+	public void dequeueAll() {
+		dll.clear();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		if (dll.size() <= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Iterator iterator() {
+		return new QueueIterator();
+	}
+	private class QueueIterator implements Iterator<E> {
+        @SuppressWarnings("unchecked")
+		private Node<E> current = head;
+        private Node<E> last = null;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
             }
-            end++;
-            items[end] = elements;
-            System.out.println("Insert " + elements);
+            E data = current.data;
+            last = current;
+            current = current.next;
+            return data;
         }
-    }
 
-    @Override
-    public boolean equals(QueueADT that) {
-        return false;
-    }
-
-    //Rerun an array containing all of the items in the queue
-    public void toArray(E[] copy) {
-        int i;
-        if (size == 0) {
-            System.out.println("Empty que");
-        }
-        else {
-            System.out.println("\nFront Index: " + beg);
-            System.out.println("Items: ");
-            for (i = beg; i <= end; i++) {
-                System.out.println(items[i] + " ");
+        @SuppressWarnings("unchecked")
+		@Override
+        public void remove() {
+            if (last == null) {
+                throw new IllegalStateException();
             }
-            System.out.println("\nRear Index: " + end);
+            if (last.previous == null) {
+                head = last.next;
+                if (head != null) {
+                    head.previous = null;
+                } else {
+                    tail = null;
+                }
+            } else if (last.next == null) {
+                tail = last.previous;
+                tail.next = null;
+            } else {
+                last.previous.next = last.next;
+                last.next.previous = last.previous;
+            }
+            size--;
+            last = null;
         }
-    }
+	}
 
-    @Override
-    public void newQueue() {
-        Queue queTest = new Queue<>();
-    }
+	@Override
+	public boolean equals(QueueADT that) {
+		if (this.iterator() == that.iterator()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    @Override
-    public Object peek() {
-        if (size == 0) {
-            return null;
-        } else {
-            return beg;
-        }
-    }
+	@Override
+	public Object[] toArray() {
+		return dll.toArrayAll();
+	}
 
-    @Override
-    public void dequeue() {
-        int element;
-        if(size == 0) {
-            System.out.println("The queue is empty");
-            return;
-        }
-        else {
-            element = items[beg];
-        }
-        if (beg >= end) {
-            beg = -1;
-            end = -1;
-        }
-        else {
-            beg++;
-        }
-        System.out.println(element + " Deleted");
+	@Override
+	public Object[] toArray(Object[] holder) throws NullPointerException {
+		if (dll.isEmpty()) {
+			throw new NullPointerException();
+		}else {
+			return dll.toArray(holder);
+		}
+	}
 
-    }
+	@Override
+	public boolean isFull() {
+		if (this.size == dll.size()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    @Override
-    public void enqueue() {
-
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return beg == -1;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public static void main(String[] args) {
-        Queue que = new Queue();
-
-
-    }
-
-    //Two queues must contain equal items appearing in the same order
-    boolean equals(Queue<E> that) {
-        return that.equals(items);
-    }
-
-    //Returns an iterator over the items contained in the stack
-    Iterator<E> iterator() {
-        Queue que = new Queue();
-        Iterator itr = que.iterator();
-
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
-        }
-        return itr;
-    }
-
-    @Override
-    public Object toArray(Object[] copy) {
-        return null;
-    }
-
-    @Override
-    public boolean isFull() {
-        return false;
-    }
-
-    @Override
-    public void dequeueAll() {
-
-    }
-
-
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    @Override
-    public Object next() {
-        return null;
-    }
+	@Override
+	public int size() {
+		return dll.size();
+	}
+	
 }
