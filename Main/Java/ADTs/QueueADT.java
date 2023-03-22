@@ -129,6 +129,9 @@ public interface QueueADT <E> {
      *
      * @return Array object of type E.
      */
+
+//    public E[] toArray(E[] holder) throws NullPointerException;
+
     public boolean isFull();
     /**
      * Accessor

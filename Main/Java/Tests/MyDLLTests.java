@@ -148,6 +148,80 @@ public class MyDLLTests {
         assert dll.size() == 3;
     }
 
+    @Test
+    public void testAdd() {
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
+        assertEquals(0, list.size());
+
+        assertTrue(list.add(1));
+        assertTrue(list.add(2));
+        assertTrue(list.add(3));
+
+        assertEquals(3, list.size());
+
+        Object[] arr = list.toArray();
+        assertEquals(1, arr[0]);
+        assertEquals(2, arr[1]);
+        assertEquals(3, arr[2]);
+
+        try {
+            list.add(null);
+            fail("Expected NullPointerException to be thrown.");
+        } catch (NullPointerException e) {
+
+        }
+    }
+
+    @Test
+    public void testAddAtIndex() {
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
+        assertEquals(0, list.size());
+
+        list.add(0, 1);
+        list.add(1, 3);
+        list.add(1, 2);
+
+        assertEquals(3, list.size());
+
+        Object[] arr = list.toArray();
+        assertEquals(1, arr[0]);
+        assertEquals(2, arr[1]);
+        assertEquals(3, arr[2]);
+
+        try {
+            list.add(-1, 4);
+            fail("Expected IndexOutOfBoundsException to be thrown.");
+        } catch (IndexOutOfBoundsException e) {
+            // Expected exception
+        }
+
+        try {
+            list.add(0, null);
+            fail("Expected NullPointerException to be thrown.");
+        } catch (NullPointerException e) {
+            // Expected exception
+        }
+    }
+
+    @Test
+    public void testHasNext() {
+        DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
+        assertFalse(dll.hasNext());
+
+        dll.insertAtEnd(1);
+        assertTrue(dll.hasNext());
+
+        dll.insertAtEnd(2);
+        assertTrue(dll.hasNext());
+
+        dll.remove(2);
+        assertTrue(dll.hasNext());
+
+        dll.remove(1);
+        assertTrue(dll.hasNext());
+    }
+
+
     /**
      * Test method for
      * @throws NullPointerException
@@ -168,7 +242,6 @@ public class MyDLLTests {
         dll.addAll(dll2);
 
         assert dll.size() == 5;
-
     }
 
     /**
@@ -204,6 +277,17 @@ public class MyDLLTests {
         dll.insertAtEnd(30);
         Object[] expected = {10,20,30};
         assertArrayEquals(expected,dll.toArray());
+    }
+
+    @Test
+    public void testToArrayAll() {
+        DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
+        dll.insertAtFront(10);
+        dll.insertAtFront(20);
+        dll.insertAtFront(30);
+
+
+
     }
 
     /**

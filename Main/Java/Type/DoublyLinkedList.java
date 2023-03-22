@@ -130,12 +130,39 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
 
     //Specific location in the list
     @Override
-    public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
-        return false;
+    public boolean add(int index, Object data) throws NullPointerException, IndexOutOfBoundsException {
+        if (data == null) {
+            throw new NullPointerException("Cannot add null element to the list.");
+        }
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+
+        Node<T> newNode = new Node<T>((T) data);
+        if (index == 0) {
+            // Insert at the front of the list
+            insertAtFront((T) data);
+        } else if (index == size()) {
+            // Insert at the end of the list
+            insertAtEnd((T) data);
+        } else {
+            // Insert at the specified index
+            Node<T> current = head;
+            for (int i = 0; i < index - 1; i++) {
+                current = current.next;
+            }
+            newNode.next = current.next;
+            current.next.previous = newNode;
+            current.next = newNode;
+            newNode.previous = current;
+            size++;
+        }
+        return true;
     }
+
     @Override
     public boolean hasNext() {
-        return false;
+        return head != null;
     }
 
     @Override
@@ -146,8 +173,22 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
     //At the end
     @Override
     public boolean add(Object toAdd) throws NullPointerException {
-        return false;
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot add null to the list.");
+        }
+        Node<T> newNode = new Node<T>((T) toAdd);
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            newNode.previous = tail;
+            tail = newNode;
+        }
+        size++;
+
+        return true;
     }
+
 
     @Override
     public boolean addAll(ListADT toAdd) throws NullPointerException {
@@ -247,9 +288,15 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
 
     @Override
     public Object[] toArrayAll() {
-        return new Object[0];
+        T[] array = (T[]) new Object[size];
+        Node<T> current = head;
+        int i = 0;
+        while (current != null) {
+            array[i++] = current.data;
+            current = current.next;
+        }
+        return array;
     }
-
 
     @Override
     public Iterator<T> iterator() {
