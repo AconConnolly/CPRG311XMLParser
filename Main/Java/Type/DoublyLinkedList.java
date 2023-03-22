@@ -221,13 +221,46 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
     //Remove at specific index
     @Override
     public Object remove(int index) throws IndexOutOfBoundsException {
-        return null;
+        if (head == null) {
+            return null;
+        }
+        if (index == 0) {
+            T dataRemove = head.data;
+            head = head.next;
+            return dataRemove;
+        }
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            if (current.next == null) {
+                return null;
+            }
+            current = current.next;
+        }
+        T dataRemove = current.data;
+        current.next = current.next.next;
+        size--;
+        return dataRemove;
     }
 
     //Search for and remove an object
     @Override
     public Object remove(Object toRemove) throws NullPointerException {
-        return null;
+        if (tail == null) {
+            return null;
+        } else {
+            Node<T> deletedNode = tail;
+
+            if (tail.previous == null) { // Only one element in the list
+                head = null;
+                tail = null;
+            } else {
+                tail = tail.previous;
+                tail.next = null;
+            }
+
+            size--;
+            return deletedNode;
+        }
     }
 
     @Override

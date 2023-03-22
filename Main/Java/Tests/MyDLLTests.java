@@ -368,5 +368,37 @@ public class MyDLLTests {
         assertEquals(50, dll.get(1));
     }
 
+    //Remove at index
+    @Test
+    public void testRemoveAtIndex() throws IndexOutOfBoundsException {
+        dll = new DoublyLinkedList();
+        dll.add(10);
+        dll.add(20);
+        dll.add(30);
+        dll.add(40);
+        dll.add(50);
+        assertEquals(5,dll.size());
+
+        Object deleted = dll.remove(2);
+        assertEquals(30, deleted);
+        assertEquals(4, dll.size());
+
+
+    }
+
+
+    //Remove at the end
+    @Test
+    public void testRemoveAtEnd() throws NullPointerException {
+        DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
+        dll.insertAtEnd(10);
+        dll.insertAtEnd(20);
+        dll.insertAtEnd(30);
+        assertEquals(3, dll.size());
+        dll.deleteFromEnd();
+
+        assertEquals(Integer.valueOf(20), dll.tail.getData());
+    }
+
 
 }
