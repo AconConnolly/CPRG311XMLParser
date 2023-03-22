@@ -33,6 +33,7 @@ public class MyDLLTests {
     }
 
     /**
+     * Clears the DLL
      * @After
      * @throws java.lang.Exception
      */
@@ -120,7 +121,7 @@ public class MyDLLTests {
     }
 
     /**
-     * Test method for
+     * Test method for determining whether the list gets cleared.
      * @throws NullPointerException
      *
      * PASSES
@@ -134,7 +135,7 @@ public class MyDLLTests {
     }
 
     /**
-     * Test method for
+     * Test method for determining the size of the DLL
      * @throws NullPointerException
      *
      * PASSES
@@ -148,6 +149,12 @@ public class MyDLLTests {
         assert dll.size() == 3;
     }
 
+    /**
+     * Test method for determining the size of the DLL
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testAdd() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
@@ -172,6 +179,12 @@ public class MyDLLTests {
         }
     }
 
+    /**
+     * Test method for determining whether an element can be added at a specific index
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testAddAtIndex() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
@@ -203,6 +216,12 @@ public class MyDLLTests {
         }
     }
 
+    /**
+     * Test method for determining whether a DLL has a 'next' element
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testHasNext() {
         DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
@@ -223,7 +242,7 @@ public class MyDLLTests {
 
 
     /**
-     * Test method for
+     * Test method for determining whether an array of elements can be added to another DLL.
      * @throws NullPointerException
      *
      * FAILS
@@ -245,7 +264,7 @@ public class MyDLLTests {
     }
 
     /**
-     * Test method for
+     * Test method for determining whether you can  get an element at a specific index
      * @throws IndexOutOfBoundsException
      *
      * FAILS
@@ -264,7 +283,7 @@ public class MyDLLTests {
     }
 
     /**
-     * Test method for
+     * Test method for determining whether a DLL can be converted to an array
      * @throws NullPointerException
      *
      * FAILS
@@ -291,7 +310,7 @@ public class MyDLLTests {
     }
 
     /**
-     * Test method for
+     * Test method for determining whether the iterator is going over an empty list
      * @throws AssertionError
      *
      * FAILS
@@ -303,6 +322,12 @@ public class MyDLLTests {
         assertFalse(ir.hasNext());
     }
 
+    /**
+     * Test method for determining whether an iterator can remove an element at a given index
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testIteratorRemove() {
         dll = new DoublyLinkedList();
@@ -323,10 +348,10 @@ public class MyDLLTests {
     }
 
     /**
-     * Test method for
+     * Test method for determining whether a DLL contains a certain element.
      * @throws NullPointerException
      *
-     * FAILS
+     * PASSES
      */
     @Test
     public void testContains() {
@@ -340,6 +365,12 @@ public class MyDLLTests {
         assertTrue(dll.contains(30));
     }
 
+    /**
+     * Test method for determining whether a DLL is empty.
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testIsEmpty() {
         dll = new DoublyLinkedList();
@@ -357,6 +388,12 @@ public class MyDLLTests {
         assertTrue(dll.isEmpty());
     }
 
+    /**
+     * Test method for determining whether an element can be set at a certain index.
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testSet() {
         dll = new DoublyLinkedList();
@@ -368,7 +405,12 @@ public class MyDLLTests {
         assertEquals(50, dll.get(1));
     }
 
-    //Remove at index
+    /**
+     * Test method for determining whether an element can be removed at a certain index.
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testRemoveAtIndex() throws IndexOutOfBoundsException {
         dll = new DoublyLinkedList();
@@ -382,12 +424,13 @@ public class MyDLLTests {
         Object deleted = dll.remove(2);
         assertEquals(30, deleted);
         assertEquals(4, dll.size());
-
-
     }
-
-
-    //Remove at the end
+    /**
+     * Test method for determining whether a DLL can remove from the end of a list.
+     * @throws NullPointerException
+     *
+     * PASSES
+     */
     @Test
     public void testRemoveAtEnd() throws NullPointerException {
         DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
@@ -399,6 +442,4 @@ public class MyDLLTests {
 
         assertEquals(Integer.valueOf(20), dll.tail.getData());
     }
-
-
 }

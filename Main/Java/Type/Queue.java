@@ -4,7 +4,7 @@ import ADTs.QueueADT;
 
 import java.util.Iterator;
 
-public class Queue<E> implements QueueADT {
+public class Queue<E> implements QueueADT, Iterator {
     int size = 5;
     int[] items = new int[size];
     int beg, end;
@@ -139,4 +139,13 @@ public class Queue<E> implements QueueADT {
     }
 
 
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+
+    @Override
+    public Object next() {
+        return null;
+    }
 }
