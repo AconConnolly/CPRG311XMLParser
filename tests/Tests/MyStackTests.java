@@ -168,6 +168,25 @@ public class MyStackTests {
         assertEquals(2, testArray[1]);
 
     }
+    
+    /**
+     * Test the toArray(object[])
+     */
+    @Test
+    public void testToArrayWithArray() {
+        testStack = new MyStack<>();
+        testStack.push(1);
+        testStack.push(2);
+        testStack.push(3);
+
+        Object [] testArray = new Object[10];
+
+        testStack.toArray(testArray);
+        assertEquals(1, testArray[0]);
+        assertEquals(2, testArray[1]);
+        assertEquals(3, testArray[2]);
+
+    }
 
     /**
      * Test method for
@@ -232,19 +251,51 @@ public class MyStackTests {
         assertThrows(NullPointerException.class,() -> testStack.push(null));
     }
 
-//    /**
-//     * Error when trying to add variable that is of the wrong type
-//     * @throws IllegalArgumentException
-//     */
-//    @Test
-//    public void testDifferentType() {
-//        testStack = new Stack<>();
-//
-//        try {
-//            testStack.push("Bad Variable Type");
-//            fail("Expected an IllegalArgumentException to be thrown");
-//        } catch (IllegalArgumentException e) {
-//            //Pass
-//        }
-//    }
+    /**
+     * Ment to test if the Equals method works
+     * 
+     */
+    @Test
+    public void testEquals() {
+    	testStack = new MyStack<>();
+    	testStack.push(1);
+        testStack.push(2);
+        testStack.push(3);
+        
+        MyStack<Integer> compareStack = new MyStack<>();
+        
+        compareStack.push(1);
+        compareStack.push(2);
+        compareStack.push(3);
+        
+        assertTrue(testStack.equals(compareStack));
+        
+        compareStack.push(7);
+        assertFalse(testStack.equals(compareStack));
+        
+        MyStack<Integer> compareStack2 = new MyStack<>();
+        
+        compareStack2.push(1);
+        compareStack2.push(2);
+        compareStack2.push(5);
+        
+        assertFalse(testStack.equals(compareStack2));
+    }
+    
+    
+    /**
+     * Test for the search() method
+     * 
+     */
+    @Test
+    public void testSearch() {
+    	testStack = new MyStack<>();
+    	testStack.push(1);
+        testStack.push(2);
+        testStack.push(3);
+        
+        assertEquals(2, testStack.search(1));
+        assertEquals(0, testStack.search(3));
+        assertEquals(-1, testStack.search(7));
+    }
 }
