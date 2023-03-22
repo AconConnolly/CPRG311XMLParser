@@ -22,7 +22,7 @@ public interface QueueADT <E> {
      * PostCondition: new Queue created successfully
      */
 
-    public void peek();
+    public E peek();
     /**
      * Mutator
      * Retrieves, but does not remove the head of the queue,
@@ -65,19 +65,6 @@ public interface QueueADT <E> {
      * is incompatible with the rest of the queue
      *
      */
-    public void first();
-    /**
-     * Accessor
-     * Method to see what the first object in the queue is. Unlike peek(), use when
-     * you know the queue is not empty.
-     *
-     * PreCondition: A queue object.
-     *
-     * PostCondition: The object that is the first member in the queue
-     *
-     *@exception EmptyStackException called if the queue object
-     * called is either empty or does not exist (NullPointerException)
-     */
     public boolean isEmpty();
     /**
      * Transformer
@@ -90,7 +77,7 @@ public interface QueueADT <E> {
      *
      *@exception nullPointerException called if the queue object called does not exist
      */
-    public void size();
+    public int size();
     /**
      * Accessor
      * Method to see what the size of the queue is

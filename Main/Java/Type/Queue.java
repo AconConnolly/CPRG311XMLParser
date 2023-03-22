@@ -1,8 +1,10 @@
 package Type;
 
+import ADTs.QueueADT;
+
 import java.util.Iterator;
 
-public class Queue<E> {
+public class Queue<E> implements QueueADT {
     int size = 5;
     int[] items = new int[size];
     int beg, end;
@@ -14,9 +16,6 @@ public class Queue<E> {
     //Optional method if the queue is a fixed size
     boolean fullList() {
         return beg == 0 && end == size - 1;
-    }
-    boolean emptyList() {
-        return beg == -1;
     }
 
     void insertInto (int elements) {
@@ -32,10 +31,45 @@ public class Queue<E> {
         }
     }
 
-    //Clear the queue
-    void dequeueAll() {
+    @Override
+    public boolean equals(QueueADT that) {
+        return false;
+    }
+
+    //Rerun an array containing all of the items in the queue
+    public void toArray(E[] copy) {
+        int i;
+        if (size == 0) {
+            System.out.println("Empty que");
+        }
+        else {
+            System.out.println("\nFront Index: " + beg);
+            System.out.println("Items: ");
+            for (i = beg; i <= end; i++) {
+                System.out.println(items[i] + " ");
+            }
+            System.out.println("\nRear Index: " + end);
+        }
+    }
+
+    @Override
+    public void newQueue() {
+        Queue queTest = new Queue<>();
+    }
+
+    @Override
+    public Object peek() {
+        if (size == 0) {
+            return null;
+        } else {
+            return beg;
+        }
+    }
+
+    @Override
+    public void dequeue() {
         int element;
-        if(emptyList()) {
+        if(size == 0) {
             System.out.println("The queue is empty");
             return;
         }
@@ -50,25 +84,20 @@ public class Queue<E> {
             beg++;
         }
         System.out.println(element + " Deleted");
+
     }
 
-    //Rerun an array containing all of the items in the queue
-    void toArray(E[] copy) {
-        int i;
-        if (emptyList()) {
-            System.out.println("Empty que");
-        }
-        else {
-            System.out.println("\nFront Index: " + beg);
-            System.out.println("Items: ");
-            for (i = beg; i <= end; i++) {
-                System.out.println(items[i] + " ");
-            }
-            System.out.println("\nRear Index: " + end);
-        }
+    @Override
+    public void enqueue() {
+
     }
 
-    int size() {
+    @Override
+    public boolean isEmpty() {
+        return beg == -1;
+    }
+
+    public int size() {
         return size;
     }
 
@@ -94,7 +123,20 @@ public class Queue<E> {
         return itr;
     }
 
+    @Override
+    public Object toArray(Object[] copy) {
+        return null;
+    }
 
+    @Override
+    public boolean isFull() {
+        return false;
+    }
+
+    @Override
+    public void dequeueAll() {
+
+    }
 
 
 }
