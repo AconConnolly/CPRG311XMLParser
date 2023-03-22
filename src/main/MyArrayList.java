@@ -1,17 +1,24 @@
 package main;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import utilities.ListADT;
 
+/**
+ * Class to make a MyArrayList object 
+ * @author Matthew, Migule
+ *
+ * @param <T> allows you to set a specific type for the arrayList
+ */
 public class MyArrayList<T> implements ListADT{
 
 	int size;
 	Object[] array;
 	
+	/**
+	 * Constructor for a MyArrayList object
+	 * 
+	 */
 	public MyArrayList(){
 		size = 0;
 		final int default_size = 10;
@@ -51,10 +58,10 @@ public class MyArrayList<T> implements ListADT{
 	 * @param index The position of where the object will be added in the list
 	 * @param toAdd The value of object to add
 	 * 
-	 * @return
+	 * @return true if the object was added 
 	 * 
-	 * @exception NullPointerException
-	 * @exception IndexOutOfBoundsException
+	 * @exception NullPointerException if the object is null
+	 * @exception IndexOutOfBoundsException if the index you want to add to is outside of the bounds
 	 */
 	@Override
 	public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
@@ -87,9 +94,9 @@ public class MyArrayList<T> implements ListADT{
 	 * 
 	 * @param toAdd The value of object to add
 	 * 
-	 * @return
+	 * @return true of the object was added 
 	 * 
-	 * @exception NullPointerException
+	 * @exception NullPointerException if the object to be added is null
 	 */
 	@Override
 	public boolean add(Object toAdd) throws NullPointerException {
@@ -116,11 +123,11 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
-	 * Method
+	 * Method that add whatever is in the list to the end of the arrayList
 	 * 
-	 * @param toAdd
+	 * @param toAdd a ListADT child object that stors what is to be added to the arrayList
 	 * 
-	 * @return
+	 * @return true if everything was added
 	 */
 	@Override
 	public boolean addAll(ListADT toAdd) throws NullPointerException {
@@ -147,7 +154,7 @@ public class MyArrayList<T> implements ListADT{
 	 * 
 	 * @return The value of the object to get
 	 * 
-	 * @exception IndexOutOfBoundsException
+	 * @exception IndexOutOfBoundsException if the index is outside of the arrayList size
 	 */
 	@Override
 	public Object get(int index) throws IndexOutOfBoundsException {
@@ -164,7 +171,7 @@ public class MyArrayList<T> implements ListADT{
 	 * 
 	 * @return The value of the object to remove
 	 * 
-	 * @exception IndexOutOfBoundsException
+	 * @exception IndexOutOfBoundsException if the index is outside of the arrayList size
 	 */
 	@Override
 	public Object remove(int index) throws IndexOutOfBoundsException {
@@ -198,7 +205,7 @@ public class MyArrayList<T> implements ListADT{
 	 * 
 	 * @return The value of the object to remove
 	 * 
-	 * @exception NullPointerException
+	 * @exception NullPointerException if the object to remove is null
 	 */
 	@Override
 	public Object remove(Object toRemove) throws NullPointerException {
@@ -228,23 +235,25 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
-	 * Method to 
+	 * Method to set an object to a value at a specified index
 	 * 
-	 * @return
+	 * @return the value stored in the current index
 	 * 
-	 * @exception NullPointerException
-	 * @exception IndexOutOfBoundsException 
+	 * @exception NullPointerException if toChange is null
+	 * @exception IndexOutOfBoundsException if the index specifed it to large
 	 */
 	@Override
 	public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
+		Object o = null;
 		if(toChange == null) {
 			throw new NullPointerException();
 		}
 		if(index > size) {
 			throw new IndexOutOfBoundsException("This index is out of bounce");
 		}
+		o = this.array[index];
 		this.array[index] = toChange;
-		return null;
+		return o;
 	}
 
 	/**
@@ -268,7 +277,7 @@ public class MyArrayList<T> implements ListADT{
 	 * 
 	 * @return The value to check if the stack contains the object or not
 	 * 
-	 * @exception NullPointerException
+	 * @exception NullPointerException if toFind is null
 	 */
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
@@ -289,10 +298,10 @@ public class MyArrayList<T> implements ListADT{
 	/**
 	 * Method
 	 * 
-	 * @param toHold ff
+	 * @param toHold an array of the value to be stored in the array
 	 * @return The array containing the list values in order
 	 * 
-	 * @exception NullPointerException
+	 * @exception NullPointerException if anything in the toHold is null
 	 */
 	@Override
 	public Object[] toArray(Object[] toHold) throws NullPointerException {
@@ -321,33 +330,42 @@ public class MyArrayList<T> implements ListADT{
 	}
 
 	/**
+	 * Method to make an Iterator for everything stored in the arrayList
 	 * 
-	 * 
-	 * @return
+	 * @return an Iterator object
 	 */
 	@Override
 	public utilities.Iterator iterator() {
 		  return new Iterator(this.array);
 	}
 	
+	/**
+	 * this class extends the Iterator interface and makes an iterator of type arrayList
+	 * @author Matthew, Miguel
+	 *
+	 */
 	class Iterator implements utilities.Iterator{
 
 		int cursor;
 		Object [] theArray;
 		
-		Iterator(Object[] array){
-			cursor = -1;
-			theArray = new Object[array.length];
-			
-			for(int i = 0; i<(array.length); i++) {
-				theArray[i] = array[i];
+			/**
+			 * 
+			 * @param array is the list of object to be added to the iterator
+			 */
+			Iterator(Object[] array){
+				cursor = -1;
+				theArray = new Object[array.length];
+				
+				for(int i = 0; i<(array.length); i++) {
+					theArray[i] = array[i];
+				}
 			}
-		}
 			
 		/**
+		 * method that checks if the iterator had any more objects in it
 		 * 
-		 * 
-		 * @return
+		 * @return true if there is anything object left in the iterator
 		 */
 		@Override
 		public boolean hasNext() {
@@ -360,11 +378,9 @@ public class MyArrayList<T> implements ListADT{
 		}
 
 		/**
+		 * method the return whatever object the cursor is pointing at
 		 * 
-		 * 
-		 * @return
-		 * 
-		 * @exception NoSuchElementException
+		 * @return the value in the array that the cusor is pointing at
 		 */
 		@Override
 		public Object next() throws NoSuchElementException {

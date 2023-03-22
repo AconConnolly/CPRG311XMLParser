@@ -1,21 +1,28 @@
 package main;
 
-import java.util.Collection;
-import java.util.Comparator;
+
 import java.util.EmptyStackException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import utilities.StackADT;
 
 import main.MyArrayList;
 
+/**
+ * Class to make an object of type MyStack
+ * 
+ * @author Matthew, Migule
+ *
+ * @param <E> allows you to make a stack of a specific type
+ */
 public class MyStack<E> implements StackADT {
 	
 	int depth;
 	MyArrayList stack;
 
+	/**
+	 * Construcor to make an object of Type MyStack
+	 */
 	public MyStack() {
 		depth = 0;
 		stack = new MyArrayList();
@@ -26,7 +33,7 @@ public class MyStack<E> implements StackADT {
 	 * 
 	 * @param toAdd The object to be added to the top of the stack
 	 * 
-	 * @exception NullPointerException
+	 * @exception NullPointerException of toAdd is null
 	 */
 	@Override
 	public void push(Object toAdd) throws NullPointerException {
@@ -42,7 +49,7 @@ public class MyStack<E> implements StackADT {
 	 * 
 	 * @return The value of the object on the top of the stack
 	 * 
-	 * @exception EmptyStackException
+	 * @exception EmptyStackException if the depth of the stack is 0
 	 */
 	@Override
 	public Object pop() throws EmptyStackException {
@@ -60,7 +67,7 @@ public class MyStack<E> implements StackADT {
 	 * 
 	 * @return The value of the object on the top of the stack
 	 * 
-	 * @exception EmptyStackException
+	 * @exception EmptyStackException if the depth of the stack is 0
 	 */
 	@Override
 	public Object peek() throws EmptyStackException {
@@ -91,7 +98,7 @@ public class MyStack<E> implements StackADT {
 	}
 
 	/**
-	 * Method to get all the values in a stack
+	 * Method to make an array with all the values in a stack
 	 * 
 	 * @return The array containing the stack values in order
 	 */
@@ -101,12 +108,12 @@ public class MyStack<E> implements StackADT {
 	}
 
 	/**
-	 * Method
+	 * Method that adds every value in holder to the top of the stack
 	 * 
-	 * @param holder ff
+	 * @param holder an array that holds all the object to be added
 	 * @return The array containing the stack values in order
 	 * 
-	 * @exception NullPointerException
+	 * @exception NullPointerException if any values in the array are null
 	 */
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
@@ -119,7 +126,7 @@ public class MyStack<E> implements StackADT {
 	 * @param toFind The value of the object to check
 	 * @return The value to check if the stack contains the object or not
 	 * 
-	 * @exception NullPointerException
+	 * @exception NullPointerException if toFind is null
 	 */
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
@@ -135,30 +142,53 @@ public class MyStack<E> implements StackADT {
 	 * Method to find the position of a specific object in a stack
 	 * 
 	 * @param toFind The value of the object to find
-	 * @return The position of the object in the stack
+	 * @return The position of the object in the stack -1 if its not there and the index if its found
 	 */
 	@Override
 	public int search(Object toFind) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(stack.contains(toFind)) {
+			Iterator theList = (MyStack<E>.Iterator) this.iterator();
+			int i = 0;
+			int location = -1;
+			while(theList.hasNext()) {
+				if(theList.next() == toFind) {
+					location = i;
+				}
+				i++;
+			}
+			return location;
+		}
+		else {
+			return -1;
+		}
 	}
 	
 	/**
-	 * Method to check if two stacks are equal in depth
+	 * Method to check if two stacks are equal in depth and contents
 	 * 
-	 * @param that
-	 * @return The value to check if the stacks are in equal depth
+	 * @param that if the stack to be comaped to
+	 * @return The value to check if the stacks are equal in depth and contents
 	 */
 	@Override
 	public boolean equals(StackADT that) {
-		// TODO Auto-generated method stub
-		return false;
+		if(that.size() != this.size()) {
+			return false;
+		}
+		Iterator main =  new Iterator(stack);
+		Iterator compare =  (MyStack<E>.Iterator) that.iterator();
+		
+		while(main.hasNext()) {
+			if(main.next() != compare.next()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
 	 * Method to return the depth of a stack
 	 * 
-	 * @return The depth size
+	 * @return The depth of the stack
 	 */
 	@Override
 	public int size() {
@@ -166,19 +196,32 @@ public class MyStack<E> implements StackADT {
 	}
 
 	/**
+	 * method to get an iterator that has everything in the stack
 	 * 
+	 * @return an Iterator object containing the contents of the stack
 	 */
 	@Override
 	public utilities.Iterator iterator() {
 		return new Iterator(stack);
 	}
 
+	/**
+	 * Class to make an object of type iterator with the conents of a stack
+	 * 
+	 * @author Matthew, Migule
+	 *
+	 */
 	class Iterator implements utilities.Iterator{
 
 		int cursor;
 		Object [] theArray;
 		int size;
 		
+		/**
+		 * Constructor to make an Iterator object 
+		 * 
+		 * @param array the contends of the stack
+		 */
 		Iterator(MyArrayList array){
 			cursor = -1;
 			theArray = new Object[array.size];
@@ -190,10 +233,10 @@ public class MyStack<E> implements StackADT {
 			}
 		}
 		
-		
 		/**
+		 * method that checks if the iterator had any more objects in it
 		 * 
-		 * @return
+		 * @return true if there is anything object left in the iterator
 		 */
 		@Override
 		public boolean hasNext() {
@@ -206,10 +249,9 @@ public class MyStack<E> implements StackADT {
 		}
 
 		/**
+		 * method the return whatever object the cursor is pointing at
 		 * 
-		 * @return
-		 * 
-		 * @exception NoSuchElementException
+		 * @return the value in the array that the cusor is pointing at
 		 */
 		@Override
 		public Object next() throws NoSuchElementException {
