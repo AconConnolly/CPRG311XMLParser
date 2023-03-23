@@ -1,4 +1,4 @@
-package Type;
+package queue;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -15,10 +15,16 @@ public class MyQueue<E> implements QueueADT{
 	Node head;
 	Node tail;
 	Node next;
-	DoublyLinkedList dll = new DoublyLinkedList();
+	Node previous;
+	DoublyLinkedList dll;
 	
 	public MyQueue(int s) {
 		this.size = s;
+		this.head = null;
+		this.tail = null;
+		this.next = null;
+		this.previous = null;
+		this.dll = new DoublyLinkedList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -29,8 +35,13 @@ public class MyQueue<E> implements QueueADT{
 		} else {
 			if (this.isFull()) {
 				System.out.println("Queue is full");
-			}else {
-				dll.insertAtEnd(toAdd);
+			} else if (this.isEmpty()) {
+				this.dll.insertAtEnd(toAdd);
+				this.tail.data = toAdd;
+				this.head.data = toAdd;
+			} else {
+				this.dll.insertAtEnd(toAdd);
+				this.tail.data = toAdd;
 			}
 		}
 	}
@@ -40,23 +51,23 @@ public class MyQueue<E> implements QueueADT{
 		if (this.isEmpty()) {
 			throw new EmptyQueueException();
 		} else {
-			return dll.deleteFromFront().data;
+			return this.dll.deleteFromFront().data;
 		}
 	}
 
 	@Override
 	public Object peek() throws EmptyQueueException {
-		return head.data;
+		return this.head.data;
 	}
 
 	@Override
 	public void dequeueAll() {
-		dll.clear();
+		this.dll.clear();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		if (dll.size() <= 0) {
+		if (this.dll.size() <= 0) {
 			return true;
 		}
 		else {
@@ -124,21 +135,21 @@ public class MyQueue<E> implements QueueADT{
 
 	@Override
 	public Object[] toArray() {
-		return dll.toArrayAll();
+		return this.dll.toArrayAll();
 	}
 
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
-		if (dll.isEmpty()) {
+		if (this.dll.isEmpty()) {
 			throw new NullPointerException();
 		}else {
-			return dll.toArray(holder);
+			return this.dll.toArray(holder);
 		}
 	}
 
 	@Override
 	public boolean isFull() {
-		if (this.size == dll.size()) {
+		if (this.size == this.dll.size()) {
 			return true;
 		} else {
 			return false;
@@ -147,7 +158,7 @@ public class MyQueue<E> implements QueueADT{
 
 	@Override
 	public int size() {
-		return dll.size();
+		return this.dll.size();
 	}
 	
 }
