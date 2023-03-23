@@ -17,7 +17,7 @@ import queue.MyQueue;
 class MyQueueTests {
 	
 	
-	MyQueue testQueue = new MyQueue(5);
+	MyQueue testQueue;
 	
 	/**
 	 * @throws java.lang.Exception
