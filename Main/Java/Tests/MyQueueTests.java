@@ -76,6 +76,13 @@ class MyQueueTests {
 		
 		// Test the queue is empty
 		assertTrue(testQueue.isEmpty());
+		
+		// Test dequeue fails when used on an empty queue
+		try {
+			testQueue.dequeue();
+			fail();
+		} catch (EmptyQueueException e) {
+		}
 	}
 
 	/**
@@ -123,6 +130,11 @@ class MyQueueTests {
 	void testIsEmpty() {
 		// Test queue is empty as nothing has been added
 		assertTrue(testQueue.isEmpty());
+		
+		testQueue.enqueue(1);
+		
+		// Test queue is not empty
+		assertFalse(testQueue.isEmpty());
 	}
 
 	/**
@@ -141,6 +153,26 @@ class MyQueueTests {
 		MyQueue goodQueue = new MyQueue(5);
 		MyQueue badQueue = new MyQueue(5);
 		
+		testQueue.enqueue(1);
+		testQueue.enqueue(2);
+		testQueue.enqueue(3);
+		testQueue.enqueue(4);
+		
+		goodQueue.enqueue(1);
+		goodQueue.enqueue(2);
+		goodQueue.enqueue(3);
+		goodQueue.enqueue(4);
+		
+		badQueue.enqueue(4);
+		badQueue.enqueue(3);
+		badQueue.enqueue(2);
+		badQueue.enqueue(1);
+		
+		// Test the test queue equals the good queue
+		assertTrue(testQueue.equals(goodQueue));
+		
+		// Test the test queue does not equal the bad queue
+		assertFalse(testQueue.equals(badQueue));
 	}
 
 	/**
@@ -148,7 +180,18 @@ class MyQueueTests {
 	 */
 	@Test
 	void testToArray() {
-		fail("Not yet implemented");
+		testQueue.enqueue(1);
+		testQueue.enqueue(2);
+		testQueue.enqueue(3);
+		testQueue.enqueue(4);
+		Object[] obj = new Object[5];
+		obj[1] = 1;
+		obj[2] = 2;
+		obj[3] = 3;
+		obj[4] = 4;
+		
+		// Test the queue to array equals the object array
+		assertEquals(obj, testQueue.toArray());
 	}
 
 	/**
@@ -156,7 +199,19 @@ class MyQueueTests {
 	 */
 	@Test
 	void testToArrayObjectArray() {
-		fail("Not yet implemented");
+		testQueue.enqueue(1);
+		testQueue.enqueue(2);
+		testQueue.enqueue(3);
+		testQueue.enqueue(4);
+		Object[] obj = new Object[5];
+		Object[] array = new Object[5];
+		obj[1] = 1;
+		obj[2] = 2;
+		obj[3] = 3;
+		obj[4] = 4;
+		
+		// Test both object arrays are equal
+		assertEquals(obj, testQueue.toArray(array));
 	}
 
 	/**
@@ -164,7 +219,18 @@ class MyQueueTests {
 	 */
 	@Test
 	void testIsFull() {
-		fail("Not yet implemented");
+		testQueue.enqueue(1);
+		testQueue.enqueue(2);
+		testQueue.enqueue(3);
+		testQueue.enqueue(4);
+		
+		// Test queue is not full
+		assertFalse(testQueue.isFull());
+		
+		testQueue.enqueue(5);
+		
+		// Test queue is full
+		assertTrue(testQueue.isFull());
 	}
 
 	/**
