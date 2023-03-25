@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -91,11 +93,8 @@ class MyQueueTests {
 	@Test
 	void testPeek() throws EmptyQueueException{
 		// Test EmptyQueueException is thrown due to the queue being empty
-		try {
-			testQueue.peek();
-			fail();
-		} catch (EmptyQueueException e) {
-		}
+		assertThrows(EmptyQueueException.class,() -> testQueue.peek());
+
 		
 		testQueue.enqueue(1);
 		
@@ -142,7 +141,31 @@ class MyQueueTests {
 	 */
 	@Test
 	void testIterator() {
-		fail("Not yet implemented");
+		testQueue.enqueue(1);
+		testQueue.enqueue(2);
+		testQueue.enqueue(3);
+		testQueue.enqueue(4);
+		
+		// Test the iterator has a next value
+		assertTrue(testQueue.iterator().hasNext());
+		
+		// Test the first value of the iterator is 1
+		assertEquals(1, testQueue.iterator().next());
+		
+		// Test the next value is 2
+		assertEquals(2, testQueue.iterator().next());
+		
+		// Test the next value is 3
+		assertEquals(3, testQueue.iterator().next());
+		
+		// Test the next value in 4
+		assertEquals(4, testQueue.iterator().next());
+		
+		// Test the iterator does not have a next value
+		assertFalse(testQueue.iterator().hasNext());
+		
+		// Test the method throws NoSuchElementException
+		assertThrows(NoSuchElementException.class,() -> testQueue.iterator().next());
 	}
 
 	/**
@@ -165,8 +188,6 @@ class MyQueueTests {
 		
 		badQueue.enqueue(4);
 		badQueue.enqueue(3);
-		badQueue.enqueue(2);
-		badQueue.enqueue(1);
 		
 		// Test the test queue equals the good queue
 		assertTrue(testQueue.equals(goodQueue));
