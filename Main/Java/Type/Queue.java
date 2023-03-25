@@ -70,12 +70,11 @@ public class MyQueue<E> implements QueueADT{
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public Iterator<E> iterator() {
 		return new QueueIterator();
 	}
-	private class QueueIterator implements Iterator {
+	private class QueueIterator implements Iterator<E> {
         private Node current = head;
         @Override
         public boolean hasNext() {
