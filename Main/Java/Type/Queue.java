@@ -69,9 +69,10 @@ public class MyQueue<E> implements QueueADT{
 			return false;
 		}
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public Iterator iterator() {
+	public Iterator<E> iterator() {
 		return new QueueIterator();
 	}
 	private class QueueIterator implements Iterator {
