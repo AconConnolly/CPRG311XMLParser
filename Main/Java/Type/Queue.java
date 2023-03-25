@@ -87,9 +87,9 @@ public class MyQueue<E> implements QueueADT{
                 throw new NoSuchElementException();
             }
 			E data = (E) current.data;
-            current = current.next;
+        	current = current.next;
             return data;
-        }
+		}
 	}
 	@Override
 	public boolean equals(QueueADT that) {
