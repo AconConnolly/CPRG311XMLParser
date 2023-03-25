@@ -39,10 +39,11 @@ class MyQueueTests {
 
 	/**
 	 * Test method for {@link queue.MyQueue#enqueue(java.lang.Object)}.
-	 * @throws EmptyQueueException 
+	 * @throws EmptyQueueException thrown when the peek returns nothing
+	 * @throws NullPointerException thrown when the added value is null or when trying to add to a full queue
 	 */
 	@Test
-	void testEnqueue() throws EmptyQueueException {
+	void testEnqueue() throws EmptyQueueException, NullPointerException {
 		testQueue.enqueue(1);
 		testQueue.enqueue(3);
 		
@@ -51,6 +52,16 @@ class MyQueueTests {
 		
 		// Test the value at the front of the queue is 1
 		assertEquals(1, testQueue.peek());
+		
+		// Test does not add the null value and throws a NullPointerException
+		assertThrows(NullPointerException.class,() -> testQueue.enqueue(null));
+		
+		testQueue.enqueue(2);
+		testQueue.enqueue(4);
+		testQueue.enqueue(5);
+		
+		// Test throws a NullPointerException and does not add the value
+		assertThrows(NullPointerException.class,() -> testQueue.enqueue(6));
 	}
 
 	/**
@@ -79,12 +90,8 @@ class MyQueueTests {
 		// Test the queue is empty
 		assertTrue(testQueue.isEmpty());
 		
-		// Test dequeue fails when used on an empty queue
-		try {
-			testQueue.dequeue();
-			fail();
-		} catch (EmptyQueueException e) {
-		}
+		// Test dequeue fails when used on an empty queue and throws EmptyQueueException
+		assertThrows(EmptyQueueException.class,() -> testQueue.dequeue());
 	}
 
 	/**
@@ -105,6 +112,11 @@ class MyQueueTests {
 		
 		// Test the value shown is 1
 		assertEquals(1, testQueue.peek());
+		
+		testQueue.dequeue();
+		
+		// Test the value shown is 2
+		assertEquals(2, testQueue.peek());
 	}
 
 	/**
