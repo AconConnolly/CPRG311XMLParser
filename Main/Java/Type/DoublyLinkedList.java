@@ -303,7 +303,14 @@ public class DoublyLinkedList <T> implements ListADT, Iterator {
 
     @Override
     public Object[] toArray(Object[] toHold) throws NullPointerException {
-        return new Object[0];
+        Object[] array = toHold;
+        Node<T> current = head;
+        int i = 0;
+        while (current != null) {
+            array[i++] = current.data;
+            current = current.next;
+        }
+        return array;
     }
 
     @Override
