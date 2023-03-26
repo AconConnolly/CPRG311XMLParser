@@ -182,7 +182,7 @@ public class MyArrayList<T> implements ListADT{
 		if(index == this.size-1) {
 			whatWasRemoved = array[index];
 			array[index] = null;
-			this.size =- 1;		
+			this.size = size - 1;		
 		}
 		else {
 			whatWasRemoved = array[index];

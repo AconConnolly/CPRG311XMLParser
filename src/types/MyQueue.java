@@ -4,8 +4,8 @@ import utilities.Iterator;
 import java.util.NoSuchElementException;
 
 import utilities.QueueADT;
-import types.DoublyLinkedList;
-import types.DoublyLinkedList.*;
+import types.MyDLL;
+import types.MyDLL.*;
 import exceptions.EmptyQueueException;
 
 @SuppressWarnings({ "serial", "rawtypes" })
@@ -14,13 +14,13 @@ public class MyQueue<E> implements QueueADT{
 	int size;
 	Node head;
 	Node tail;
-	DoublyLinkedList dll;
+	MyDLL dll;
 	
 	public MyQueue(int s) {
 		this.size = s;
 		this.head = null;
 		this.tail = null;
-		this.dll = new DoublyLinkedList();
+		this.dll = new MyDLL();
 	}
 
 	@SuppressWarnings("unchecked")

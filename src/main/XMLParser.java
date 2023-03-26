@@ -32,52 +32,62 @@ public class XMLParser {
 			if(tag.charAt(1) =='/'){
 				String tagName = tag.substring(2, tag.indexOf('>'));
 				String stacktag = (String) stack.peek();
-				stacktag = stacktag.substring(1, stacktag.indexOf(' '));
+				try {
+					stacktag = stacktag.substring(1, stacktag.indexOf(' '));
+				}
+				catch(IndexOutOfBoundsException e) {
+					stacktag = stacktag.substring(1, stacktag.length()-1);
+				}
 				
-				if(errorQ.size() != 0) {
-					String errorQpeek = (String) errorQ.peek();
-					errorQpeek = errorQpeek.substring(2, tag.indexOf('>'));
-					if(tagName.equals(stacktag)) {
-						stack.pop();
-					}
-					else if(tagName.equals(errorQpeek)) {
-						errorQ.dequeue();
-					}
-					else if(stack.size() == 0) {
-						errorQ.enqueue(tagName);
-					}
-					else {
-						Iterator checkForTag = (Iterator) stack.iterator();
-						boolean isInThere = false;
-						while(checkForTag.hasNext()) {
-							String stackCheck = (String) checkForTag.next();
-							stackCheck = stackCheck.substring(1, stacktag.indexOf(' '));
-							
-							if(stackCheck.equals(tagName)) { 
-								isInThere = true;
-							}
+				if(tagName.equals(stacktag)) {
+					stack.pop();
+				}
+				else {
+					if(errorQ.size() != 0) {
+						String errorQpeek = (String) errorQ.peek();
+						errorQpeek = errorQpeek.substring(2, tag.indexOf('>'));
+	
+						if(tagName.equals(errorQpeek)) {
+							errorQ.dequeue();
 						}
-						if(isInThere) {
-							String popTellFind = (String) stack.pop();
-							popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
-							while(popTellFind != tagName) {
-								errorQ.enqueue(popTellFind);
-								popTellFind = (String) stack.pop();
-								popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
-							}
-							errorQ.enqueue(popTellFind);
+						else if(stack.size() == 0) {
+							errorQ.enqueue(tagName);
 						}
 						else {
-							extrasQ.enqueue(tagName);
+							Iterator checkForTag = (Iterator) stack.iterator();
+							boolean isInThere = false;
+							while(checkForTag.hasNext()) {
+								String stackCheck = (String) checkForTag.next();
+								stackCheck = stackCheck.substring(1, stacktag.indexOf(' '));
+								
+								if(stackCheck.equals(tagName)) { 
+									isInThere = true;
+								}
+							}
+							if(isInThere) {
+								String popTellFind = (String) stack.pop();
+								popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
+								while(popTellFind != tagName) {
+									errorQ.enqueue(popTellFind);
+									popTellFind = (String) stack.pop();
+									popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
+								}
+								errorQ.enqueue(popTellFind);
+							}
+							else {
+								extrasQ.enqueue(tagName);
+							}
 						}
 					}
-				}
-					
+				}	
 					
 			}
 			else {
 				//Check for a self closing tag char at index of length - 2 should be "/"
 				if(tag.charAt(tag.length()-2) == '/') {
+					
+				}
+				else if(tag.charAt(tag.length()-2) == '?' && tag.charAt(1) == '?'){
 					
 				}
 				else {
