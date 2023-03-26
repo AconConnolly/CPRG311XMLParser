@@ -13,7 +13,7 @@ import types.MyStack.Iterator;
 public class XMLParser {
 
 	public static void main(String args[]) throws FileNotFoundException, EmptyQueueException {
-		File f = new File("res/sample1.xml");
+		File f = new File("res/sample2.xml");
 		Scanner file = new Scanner(f);
 		MyStack stack = new MyStack();
 		MyQueue errorQ = new MyQueue(100);
@@ -98,6 +98,9 @@ public class XMLParser {
 			tag = null;
 		}
 		//after the file is read 
+		if(stack.size() == 0 && errorQ.size() == 0 && extrasQ.size() == 0) {
+			System.out.println("There is no errors in this XML");
+		}
 		if(stack.size()>0) {
 			while(stack.size()>0) {
 				errorQ.enqueue(stack.pop());
