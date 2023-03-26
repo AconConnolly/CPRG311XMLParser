@@ -18,8 +18,6 @@ public class MyQueue<E> implements QueueADT{
 	
 	public MyQueue(int s) {
 		this.size = s;
-		this.head = null;
-		this.tail = null;
 		this.dll = new DoublyLinkedList();
 	}
 
@@ -30,7 +28,7 @@ public class MyQueue<E> implements QueueADT{
 			throw new NullPointerException();
 		} else {
 			if (this.isFull()) {
-				System.out.println("Queue is full");
+				throw new NullPointerException();
 			} else {
 				this.dll.insertAtEnd(toAdd);
 			}
@@ -69,32 +67,42 @@ public class MyQueue<E> implements QueueADT{
 			return false;
 		}
 	}
-	
+
 	@Override
-	public Iterator<E> iterator() {
-		return new QueueIterator();
+	public Iterator<E> iterator() throws NoSuchElementException{
+		return new QueueIterator(this, this.size());
 	}
 	private class QueueIterator implements Iterator<E> {
-        private Node current = head;
+        private E[] queueArray;
+		private int current;
+		private int length;
+        @SuppressWarnings("unchecked")
+		public QueueIterator(MyQueue<E> queue, int length) {
+        	this.queueArray = (E[]) queue.toArray();
+        	this.current = 0;
+        	this.length = length;
+        }
         @Override
         public boolean hasNext() {
-            return current.next != null;
+            return this.current < this.length;
         }
-        @SuppressWarnings("unchecked")
         @Override
         public E next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-			E data = (E) current.data;
-        	current = current.next;
+			E data = (E) this.queueArray[this.current];
+            this.current++;
             return data;
-		}
+        }
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(QueueADT that) {
-		while (this.iterator().hasNext()) {
-			if (this.iterator().next().equals(that.iterator().next())) {
+		Iterator<E> main = this.iterator();
+		Iterator<E> comp = that.iterator();
+		while (main.hasNext()) {
+			if (main.next() == (comp.next())) {
 			} else {
 				return false;
 			}
@@ -131,4 +139,3 @@ public class MyQueue<E> implements QueueADT{
 	}
 	
 }
-
