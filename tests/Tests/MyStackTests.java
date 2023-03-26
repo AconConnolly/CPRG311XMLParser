@@ -5,12 +5,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.MyStack;
+import types.MyStack;
 
 import java.util.EmptyStackException;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Stack;
 
 import static org.junit.Assert.*;
 

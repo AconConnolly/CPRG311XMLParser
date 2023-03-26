@@ -1,23 +1,8 @@
 package Tests;
 
 import org.junit.*;
-
-import junit.framework.AssertionFailedError;
-import main.MyArrayList;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
+import types.MyArrayList;
 import static org.junit.Assert.*;
-
-/*
-import static org.junit.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.*;
-
-import sait.sll.utility.*;
-*/
 
 public class MyArrayListTests {
     private static MyArrayList<String> testList;
@@ -83,16 +68,6 @@ public class MyArrayListTests {
         testList.clear();
         assertTrue(testList.isEmpty());
     }
-
-//    /**
-//     * Test method for
-//     * @throws NullPointerException
-//     * @throws IndexOutOfBoundsException
-//     */
-//    @Test
-//    public void testAdd() {
-//
-//    }
 
     /**
      * Test method for
@@ -165,16 +140,6 @@ public class MyArrayListTests {
         assertEquals("two", testList.get(1));
         assertEquals("three", testList.get(2));
     }
-
-//    /**
-//     * Test method for
-//     * @throws IndexOutOfBoundsException
-//     */
-//    @Test
-//    public void testRemove() {
-//
-//
-//    }
 
     /**
      * Test method for
@@ -346,32 +311,6 @@ public class MyArrayListTests {
 
         assertThrows(NullPointerException.class, () -> testList.add(null));
     }
-
-    /**
-     * Error when trying to set a value that is out of bounds
-     * @throws IndexOutOfBoundsException
-     */
-   // @Test
-   // public void testSetIndexOut() {
-    //    testList = new MyArrayList<>();
-    //    testList.add("one");
-    //    testList.add("two");
-//
-    //    testList.set(2,"three");
-   // }
-
-    /**
-     * Error when trying to add with a value that is out of bounds
-     * @throws IndexOutOfBoundsException
-     */
-   // @Test
-    //public void testAddIndexOut() {
-     //   testList = new MyArrayList<>();
-    //    testList.add("one");
-    //    testList.add("two");
-//
-    //    testList.set(3,"three");
-    //}
 
     /**
      * Error when trying to add variable that is of the wrong type
