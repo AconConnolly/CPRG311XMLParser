@@ -1,8 +1,8 @@
 package queue;
 
-import utilities.Iterator;
 import java.util.NoSuchElementException;
 
+import utilities.Iterator;
 import ADTs.QueueADT;
 import utilities.DoublyLinkedList;
 import utilities.DoublyLinkedList.*;
