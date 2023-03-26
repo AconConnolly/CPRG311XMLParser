@@ -8,6 +8,11 @@ import utilities.DoublyLinkedList;
 import utilities.DoublyLinkedList.*;
 import exceptions.EmptyQueueException;
 
+/**
+ * @author Quintin Mason
+ *
+ */
+
 @SuppressWarnings({ "serial", "rawtypes" })
 public class MyQueue<E> implements QueueADT{
 	
