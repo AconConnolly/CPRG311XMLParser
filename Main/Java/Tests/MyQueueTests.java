@@ -10,9 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import exceptions.EmptyQueueException;
 import queue.MyQueue;
+import utilities.Iterator;
 
 /**
- * @author qball
+ * @author Quintin Mason
  *
  */
 @SuppressWarnings("rawtypes")
@@ -150,34 +151,38 @@ class MyQueueTests {
 
 	/**
 	 * Test method for {@link queue.MyQueue#iterator()}.
+	 * @param <E>
 	 */
+	@SuppressWarnings("unchecked")
 	@Test
-	void testIterator() {
+	<E> void testIterator() {
 		testQueue.enqueue(1);
 		testQueue.enqueue(2);
 		testQueue.enqueue(3);
 		testQueue.enqueue(4);
 		
+		Iterator<E> testIterator = testQueue.iterator();
+		
 		// Test the iterator has a next value
-		assertTrue(testQueue.iterator().hasNext());
+		assertTrue(testIterator.hasNext());
 		
 		// Test the first value of the iterator is 1
-		assertEquals(1, testQueue.iterator().next());
+		assertEquals(1, testIterator.next());
 		
 		// Test the next value is 2
-		assertEquals(2, testQueue.iterator().next());
+		assertEquals(2, testIterator.next());
 		
 		// Test the next value is 3
-		assertEquals(3, testQueue.iterator().next());
+		assertEquals(3, testIterator.next());
 		
 		// Test the next value in 4
-		assertEquals(4, testQueue.iterator().next());
+		assertEquals(4, testIterator.next());
 		
 		// Test the iterator does not have a next value
-		assertFalse(testQueue.iterator().hasNext());
+		assertFalse(testIterator.hasNext());
 		
 		// Test the method throws NoSuchElementException
-		assertThrows(NoSuchElementException.class,() -> testQueue.iterator().next());
+		assertThrows(NoSuchElementException.class,() -> testIterator.next());
 	}
 
 	/**
@@ -200,6 +205,8 @@ class MyQueueTests {
 		
 		badQueue.enqueue(4);
 		badQueue.enqueue(3);
+		badQueue.enqueue(2);
+		badQueue.enqueue(1);
 		
 		// Test the test queue equals the good queue
 		assertTrue(testQueue.equals(goodQueue));
@@ -218,13 +225,23 @@ class MyQueueTests {
 		testQueue.enqueue(3);
 		testQueue.enqueue(4);
 		Object[] obj = new Object[5];
-		obj[1] = 1;
-		obj[2] = 2;
-		obj[3] = 3;
-		obj[4] = 4;
+		obj[0] = 1;
+		obj[1] = 2;
+		obj[2] = 3;
+		obj[3] = 4;
+		Object[] main = testQueue.toArray();
 		
-		// Test the queue to array equals the object array
-		assertEquals(obj, testQueue.toArray());
+		// Test the first objects are equal in both arrays
+		assertEquals(obj[0], main[0]);
+		
+		// Test the second objects are equal in both arrays
+		assertEquals(obj[1], main[1]);
+		
+		// Test the third objects are equal in both arrays
+		assertEquals(obj[2], main[2]);
+		
+		// Test the fourth objects are equal in both arrays
+		assertEquals(obj[3], main[3]);
 	}
 
 	/**
@@ -238,13 +255,22 @@ class MyQueueTests {
 		testQueue.enqueue(4);
 		Object[] obj = new Object[5];
 		Object[] array = new Object[5];
-		obj[1] = 1;
-		obj[2] = 2;
-		obj[3] = 3;
-		obj[4] = 4;
+		obj[0] = 1;
+		obj[1] = 2;
+		obj[2] = 3;
+		obj[3] = 4;
 		
 		// Test both object arrays are equal
-		assertEquals(obj, testQueue.toArray(array));
+		assertEquals(obj[0], testQueue.toArray(array)[0]);
+		
+		// Test both object arrays are equal
+		assertEquals(obj[1], testQueue.toArray(array)[1]);
+		
+		// Test both object arrays are equal
+		assertEquals(obj[2], testQueue.toArray(array)[2]);
+		
+		// Test both object arrays are equal
+		assertEquals(obj[3], testQueue.toArray(array)[3]);
 	}
 
 	/**
