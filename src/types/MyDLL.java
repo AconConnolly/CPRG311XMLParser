@@ -5,6 +5,11 @@ import utilities.ListADT;
 
 import java.util.NoSuchElementException;
 
+/**
+* Method that adds every value in holder to the top of the stack
+*
+* @author Alex
+*/
 public class MyDLL <T> implements ListADT, Iterator {
     public static class Node<T> {
         T data;
@@ -38,6 +43,13 @@ public class MyDLL <T> implements ListADT, Iterator {
     This method inserts a new node at the end of the list. If empty, it will create a new node and ake the head and tail node.
     If the list is not empty, it creates a previous node and sets its previous node to the tail node, and the tails next node to current node.
     */
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     public void insertAtEnd(T data) {
         Node<T> newNode = new Node<T>(data);
         if (head == null) {
@@ -67,6 +79,13 @@ public class MyDLL <T> implements ListADT, Iterator {
     Deletes the last node of the list. If the list is empty, it will return null. If only one node, both head and tail will be set to null.
     IF more than one, it will delete the tail node and update the tail pointer to the previous node, and sets the previous node's pointer to null.
      */
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     public Node<T> deleteFromEnd() {
         if (tail == null) {
             return null;
@@ -107,6 +126,13 @@ public class MyDLL <T> implements ListADT, Iterator {
     /*
     Method traverses the list from the head node and prints the data of each node.
      */
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     public void printList() {
         Node<T> current = head;
         while (current != null) {
@@ -116,6 +142,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         System.out.println();
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     public int size() {
         return size;
     }
@@ -129,6 +162,13 @@ public class MyDLL <T> implements ListADT, Iterator {
     }
 
     //Specific location in the list
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public boolean add(int index, Object data) throws NullPointerException, IndexOutOfBoundsException {
         if (data == null) {
@@ -160,17 +200,38 @@ public class MyDLL <T> implements ListADT, Iterator {
         return true;
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public boolean hasNext() {
         return head != null;
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public Object next() {
         return null;
     }
 
     //At the end
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public boolean add(Object toAdd) throws NullPointerException {
         if (toAdd == null) {
@@ -189,7 +250,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         return true;
     }
 
-
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public boolean addAll(ListADT toAdd) throws NullPointerException {
         return false;
@@ -203,6 +270,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         }
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public T get(int index) {
         if (head == null) {
@@ -219,6 +293,13 @@ public class MyDLL <T> implements ListADT, Iterator {
     }
 
     //Remove at specific index
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public Object remove(int index) throws IndexOutOfBoundsException {
         if (head == null) {
@@ -245,6 +326,13 @@ public class MyDLL <T> implements ListADT, Iterator {
     }
 
     //Search for and remove an object
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public Object remove(Object toRemove) throws NullPointerException {
         if (tail == null) {
@@ -265,6 +353,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         }
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
         if (toChange == null) {
@@ -282,11 +377,25 @@ public class MyDLL <T> implements ListADT, Iterator {
         return oldValue;
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public boolean isEmpty() {
         return head == null;
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public boolean contains(Object toFind) throws NullPointerException {
         if (toFind == null) {
@@ -302,7 +411,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         return false;
     }
 
-
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public Object[] toArray(Object[] toHold) throws NullPointerException {
     	Object[] array = toHold;
@@ -315,6 +430,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         return array;
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     @Override
     public T[] toArray() {
         @SuppressWarnings("unchecked")
@@ -328,6 +450,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         return array;
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     public Object[] toArrayAll() {
         T[] array = (T[]) new Object[size];
         Node<T> current = head;
@@ -339,6 +468,13 @@ public class MyDLL <T> implements ListADT, Iterator {
         return array;
     }
 
+    /**
+    * Method that adds every value in holder to the top of the stack
+    *
+    * @param holder An array that holds all the object to be added
+    * @return The array containing the stack values in order
+    * @exceptions NullPointerException If the holder is null
+    */
     public utilities.Iterator iterator() {
         return (utilities.Iterator) new DLLIterator();
     }
@@ -346,10 +482,25 @@ public class MyDLL <T> implements ListADT, Iterator {
         private Node<T> current = head;
         private Node<T> last = null;
 
+        /**
+        * Method that adds every value in holder to the top of the stack
+        *
+        * @param holder An array that holds all the object to be added
+        * @return The array containing the stack values in order
+        * @exceptions NullPointerException If the holder is null
+        */
         @Override
         public boolean hasNext() {
             return current != null;
         }
+        
+        /**
+        * Method that adds every value in holder to the top of the stack
+        *
+        * @param holder An array that holds all the object to be added
+        * @return The array containing the stack values in order
+        * @exceptions NullPointerException If the holder is null
+        */
         @Override
         public T next() {
             if (!hasNext()) {
