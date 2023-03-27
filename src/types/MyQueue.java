@@ -35,7 +35,7 @@ public class MyQueue<E> implements QueueADT{
  	* Method to add an object to the back of the queue
 	*
 	* @param toAdd
-	* @exceptions NullPointerException
+	* @exceptions NullPointerException If to Add is null
  	*/
 	@Override
 	public void enqueue(Object toAdd) throws NullPointerException {
@@ -54,7 +54,7 @@ public class MyQueue<E> implements QueueADT{
  	* Method to remove an object on the front of the queue
 	*
 	* @return The value of the object that will be dequeued
-	* @exceptions EmptyQueueException
+	* @exceptions EmptyQueueException If the queue is empty
  	*/
 	@Override
 	public Object dequeue() throws EmptyQueueException {
@@ -69,7 +69,7 @@ public class MyQueue<E> implements QueueADT{
  	* Method to get the value of the object on the front of the queue
 	*
 	* @return The value of the object on front of the queue
-	* @exceptions EmptyQueueException
+	* @exceptions EmptyQueueException If the queue is empty
  	*/
 	@Override
 	public Object peek() throws EmptyQueueException {
@@ -185,7 +185,7 @@ public class MyQueue<E> implements QueueADT{
 	*
 	* @param holder An array that holds all the object to be added
 	* @return The array containing the stack values in order
-	* @exceptions NullPointerException
+	* @exceptions NullPointerException If the holder is null
  	*/
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
