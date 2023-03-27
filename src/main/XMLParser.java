@@ -50,36 +50,52 @@ public class XMLParser {
 						if(tagName.equals(errorQpeek)) {
 							errorQ.dequeue();
 						}
-						else if(stack.size() == 0) {
-							errorQ.enqueue(tagName);
+					}
+					if(stack.size() == 0) {
+						errorQ.enqueue(tagName);
+					}
+					else {
+						Iterator checkForTag = (Iterator) stack.iterator();
+						boolean isInThere = false;
+						while(checkForTag.hasNext()) {
+							String stackCheck = (String) checkForTag.next();
+							try {
+								stackCheck = stackCheck.substring(1, stackCheck.indexOf(' '));
+							}
+							catch(StringIndexOutOfBoundsException e) {
+								stackCheck = stackCheck.substring(1, stackCheck.length()-1);
+							}
+							
+							if(stackCheck.equals(tagName)) { 
+								isInThere = true;
+							}
+						}
+						if(isInThere) {
+							String popTellFind = (String) stack.pop();
+							try {
+								popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
+							}
+							catch(StringIndexOutOfBoundsException e) {
+								popTellFind = popTellFind.substring(1, popTellFind.length()-1);
+							}
+							while(!popTellFind.equals(tagName)) {
+								errorQ.enqueue(popTellFind);
+								popTellFind = (String) stack.pop();
+								try {
+									popTellFind = popTellFind.substring(1, popTellFind.indexOf(' '));
+								}
+								catch(StringIndexOutOfBoundsException e) {
+									popTellFind = popTellFind.substring(1, popTellFind.length()-1);
+								}
+							}
+							//errorQ.enqueue(popTellFind);
 						}
 						else {
-							Iterator checkForTag = (Iterator) stack.iterator();
-							boolean isInThere = false;
-							while(checkForTag.hasNext()) {
-								String stackCheck = (String) checkForTag.next();
-								stackCheck = stackCheck.substring(1, stacktag.indexOf(' '));
-								
-								if(stackCheck.equals(tagName)) { 
-									isInThere = true;
-								}
-							}
-							if(isInThere) {
-								String popTellFind = (String) stack.pop();
-								popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
-								while(popTellFind != tagName) {
-									errorQ.enqueue(popTellFind);
-									popTellFind = (String) stack.pop();
-									popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
-								}
-								errorQ.enqueue(popTellFind);
-							}
-							else {
-								extrasQ.enqueue(tagName);
-							}
+							extrasQ.enqueue(tagName);
 						}
 					}
-				}	
+				}
+					
 					
 			}
 			else {
@@ -90,11 +106,13 @@ public class XMLParser {
 				else if(tag.charAt(tag.length()-2) == '?' && tag.charAt(1) == '?'){
 					
 				}
+				else if(tag.charAt(tag.length()-2) == '>' && tag.charAt(tag.length()-1) == '>') {
+					errorQ.enqueue(tag);
+				}
 				else {
 				stack.push(tag);
 				}
 			}
-			//System.out.println(tag);
 			tag = null;
 		}
 		//after the file is read 
@@ -122,12 +140,14 @@ public class XMLParser {
 			String errorpeek = (String)errorQ.peek();
 			String extraspeek = (String)extrasQ.peek();
 			
-			if(!errorpeek.equals(extraspeek)) {
-				System.out.println("Error " + (String)errorQ.dequeue());
-			}
-			else {
-				errorQ.dequeue();
-				extrasQ.dequeue();
+			while(extrasQ.size() > 0 && errorQ.size()>0) {
+				if(!errorpeek.equals(extraspeek)) {
+					System.out.println("Error " + (String)errorQ.dequeue());
+				}
+				else {
+					errorQ.dequeue();
+					extrasQ.dequeue();
+				}
 			}
 		}
 			
