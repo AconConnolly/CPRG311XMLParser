@@ -9,8 +9,11 @@ import types.MyDLL.*;
 import exceptions.EmptyQueueException;
 
 /**
+ * Class to make an object of type MyQueue
+ *
  * @author Quintin Mason
  *
+ * @param <E> allows you to make a queue of a specific type
  */
 
 @SuppressWarnings({ "serial", "rawtypes" })
@@ -29,13 +32,11 @@ public class MyQueue<E> implements QueueADT{
 	@SuppressWarnings("unchecked")
 	
 	/**
- 	* Method
+ 	* Method to add an object to the back of the queue
 	*
-	* @param
-	* @return
-	* @exceptions
+	* @param toAdd
+	* @exceptions NullPointerException
  	*/
-
 	@Override
 	public void enqueue(Object toAdd) throws NullPointerException {
 		if (toAdd == null) {
@@ -49,6 +50,12 @@ public class MyQueue<E> implements QueueADT{
 		}
 	}
 
+	/**
+ 	* Method to remove an object on the front of the queue
+	*
+	* @return The value of the object that will be dequeued
+	* @exceptions EmptyQueueException
+ 	*/
 	@Override
 	public Object dequeue() throws EmptyQueueException {
 		if (this.isEmpty()) {
@@ -58,6 +65,12 @@ public class MyQueue<E> implements QueueADT{
 		}
 	}
 
+	/**
+ 	* Method to get the value of the object on the front of the queue
+	*
+	* @return The value of the object on front of the queue
+	* @exceptions EmptyQueueException
+ 	*/
 	@Override
 	public Object peek() throws EmptyQueueException {
 		if (this.isEmpty()) {
@@ -67,11 +80,19 @@ public class MyQueue<E> implements QueueADT{
 		}
 	}
 
+	/**
+ 	* Method to remove all objects in the queue leaving it empty
+ 	*/
 	@Override
 	public void dequeueAll() {
 		this.dll.clear();
 	}
 
+	/**
+ 	* Method to check if the queue is empty or not
+	*
+	* @return The value to check if the queue is empty or not
+ 	*/
 	@Override
 	public boolean isEmpty() {
 		if (this.dll.size() <= 0) {
@@ -82,6 +103,13 @@ public class MyQueue<E> implements QueueADT{
 		}
 	}
 
+	/**
+ 	* Method
+	*
+	* @param
+	* @return
+	* @exceptions
+ 	*/
 	@Override
 	public Iterator<E> iterator() throws NoSuchElementException{
 		return new QueueIterator(this, this.size());
@@ -96,10 +124,26 @@ public class MyQueue<E> implements QueueADT{
         	this.current = 0;
         	this.length = length;
         }
+		
+	/**
+ 	* Method
+	*
+	* @param
+	* @return
+	* @exceptions
+ 	*/
         @Override
         public boolean hasNext() {
             return this.current < this.length;
         }
+		
+	/**
+ 	* Method
+	*
+	* @param
+	* @return
+	* @exceptions
+ 	*/
         @Override
         public E next() {
             if (!hasNext()) {
@@ -111,6 +155,14 @@ public class MyQueue<E> implements QueueADT{
         }
 	}
 	@SuppressWarnings("unchecked")
+	
+	/**
+ 	* Method
+	*
+	* @param
+	* @return
+	* @exceptions
+ 	*/
 	@Override
 	public boolean equals(QueueADT that) {
 		Iterator<E> main = this.iterator();
@@ -124,11 +176,25 @@ public class MyQueue<E> implements QueueADT{
 		return true;
 	}
 
+	/**
+ 	* Method
+	*
+	* @param
+	* @return
+	* @exceptions
+ 	*/
 	@Override
 	public Object[] toArray() {
 		return this.dll.toArrayAll();
 	}
 
+	/**
+ 	* Method
+	*
+	* @param
+	* @return
+	* @exceptions
+ 	*/
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
 		if (this.dll.isEmpty()) {
@@ -138,6 +204,11 @@ public class MyQueue<E> implements QueueADT{
 		}
 	}
 
+	/**
+ 	* Method to check if the queue is full
+	*
+	* @return The value to check if the queue is full or not
+ 	*/
 	@Override
 	public boolean isFull() {
 		if (this.size == this.dll.size()) {
@@ -147,6 +218,11 @@ public class MyQueue<E> implements QueueADT{
 		}
 	}
 
+	/**
+ 	* Method to get the queue size
+	*
+	* @return The size of the queue
+ 	*/
 	@Override
 	public int size() {
 		return this.dll.size();
