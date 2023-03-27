@@ -250,18 +250,25 @@ public class MyDLL <T> implements ListADT, Iterator {
         return true;
     }
 
+// I dunno how to explain this
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method that
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @param toAdd
+    * @return 
+    * @exceptions NullPointerException If toAdd is null
     */
     @Override
     public boolean addAll(ListADT toAdd) throws NullPointerException {
         return false;
     }
 
+// I dunno how to explain this
+    /**
+    * Method that
+    *
+    * @param otherList
+    */
     public void addAll(MyDLL<T> otherList) {
         Node<T> currentNode = otherList.head;
         while (currentNode != null) {
@@ -271,11 +278,10 @@ public class MyDLL <T> implements ListADT, Iterator {
     }
 
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method to get the data of a node at a specific index
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @param index The position in the list
+    * @return The value of the specificied node
     */
     @Override
     public T get(int index) {
@@ -294,11 +300,11 @@ public class MyDLL <T> implements ListADT, Iterator {
 
     //Remove at specific index
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method to look for a node with an index and remove it from the list
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @param index The position in the list
+    * @return The value of the deleted node
+    * @exceptions IndexOutOfBoundsException If index is out of bounds
     */
     @Override
     public Object remove(int index) throws IndexOutOfBoundsException {
@@ -327,11 +333,11 @@ public class MyDLL <T> implements ListADT, Iterator {
 
     //Search for and remove an object
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method to look for a node with an object value and remove it from the list
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @param toRemove The value of the object being removed
+    * @return The value of the deleted node
+    * @exceptions NullPointerException If toRemove is null
     */
     @Override
     public Object remove(Object toRemove) throws NullPointerException {
@@ -354,11 +360,13 @@ public class MyDLL <T> implements ListADT, Iterator {
     }
 
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method that replaces the data inside a node at a specfic index
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @param index The position of the list being replaced
+    * @param toChange The new value of the object replacing the old object
+    * @return The value of the object being replaced
+    * @exceptions NullPointerException If toChange is null
+    * @exceptions IndexOutOfBoundsException If the index is out of bounds
     */
     @Override
     public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
@@ -465,11 +473,9 @@ public class MyDLL <T> implements ListADT, Iterator {
 
 // I dunno how to explain this
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method that
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @return 
     */
     public utilities.Iterator iterator() {
         return (utilities.Iterator) new DLLIterator();
