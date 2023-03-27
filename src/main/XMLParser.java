@@ -9,7 +9,11 @@ import types.MyQueue;
 import types.MyStack;
 import types.MyStack.Iterator;
 
-
+/**
+ * Class that uses the MyStack and MyQueue to parse an XML file and show any errors that are in the file
+ * @author Matthew, Alex, Quintin, Migule 
+ *
+ */
 public class XMLParser {
 
 	public static void main(String args[]) throws FileNotFoundException, EmptyQueueException {
@@ -25,6 +29,7 @@ public class XMLParser {
 			tag = tag.trim();
 			
 			//Process the Tag
+			//Checks if its a closing tag
 			if(tag.charAt(1) =='/'){
 				String tagName = tag.substring(2, tag.indexOf('>'));
 				String stacktag = (String) stack.peek();
@@ -68,6 +73,7 @@ public class XMLParser {
 						}
 						if(isInThere) {
 							String popTellFind = (String) stack.pop();
+							String lineHolder =popTellFind;
 							try {
 								popTellFind = popTellFind.substring(1, stacktag.indexOf(' '));
 							}
@@ -75,7 +81,7 @@ public class XMLParser {
 								popTellFind = popTellFind.substring(1, popTellFind.length()-1);
 							}
 							while(!popTellFind.equals(tagName)) {
-								errorQ.enqueue(popTellFind);
+								errorQ.enqueue(lineHolder);
 								popTellFind = (String) stack.pop();
 								try {
 									popTellFind = popTellFind.substring(1, popTellFind.indexOf(' '));
@@ -98,6 +104,7 @@ public class XMLParser {
 				if(tag.charAt(tag.length()-2) == '/') {
 					
 				}
+				//Checks if its the Starting tag
 				else if(tag.charAt(tag.length()-2) == '?' && tag.charAt(1) == '?'){
 					
 				}

@@ -10,18 +10,36 @@ import java.util.NoSuchElementException;
 *
 * @author Alex
 */
-public class MyDLL <T> implements ListADT, Iterator {
-    public static class Node<T> {
+public class MyDLL <T> implements ListADT, Iterator{
+    /**
+     * This is a inner class for node objects so we can store data on the Linked List
+     * @author Alex
+     *
+     * @param <T> allows you to make a node of any data type
+     */
+	public static class Node<T> {
         T data;
         Node <T> previous;
         Node <T> next;
 
+        /**
+         * Constructor for a node object 
+         * @param data the value to be kept in the node
+         */
         public Node(T data) {
             this.data = data;
         }
+        
+        /**
+         * Defualt constructor for a Node
+         */
         public Node() {
         }
 
+        /**
+         * allows you to get the data Stored in a specific node
+         * @return data stores in the node
+         */
         public T getData() {
             return data;
         }
@@ -31,6 +49,9 @@ public class MyDLL <T> implements ListADT, Iterator {
     public Node<T> tail;
     int size;
 
+    /**
+     * Constructor for A MyDLL object 
+     */
     public MyDLL() {
         this.head = null;
         this.tail = null;
@@ -78,10 +99,6 @@ public class MyDLL <T> implements ListADT, Iterator {
         size++;
     }
 
-    /*
-    Deletes the last node of the list. If the list is empty, it will return null. If only one node, both head and tail will be set to null.
-    IF more than one, it will delete the tail node and update the tail pointer to the previous node, and sets the previous node's pointer to null.
-     */
     /**
     * Method that deletes the data at the end of the list
     *
@@ -154,6 +171,9 @@ public class MyDLL <T> implements ListADT, Iterator {
         return size;
     }
 
+    /**
+     * Method to clear all the contents of the linked List
+     */
     public void clear() {
         Node<T> current = tail;
         while (current != null) {
@@ -161,8 +181,28 @@ public class MyDLL <T> implements ListADT, Iterator {
             deleteFromEnd();
         }
     }
+    
+    /**
+     * Method that checks if head of the list is null
+     * 
+     * @return true If the head is not null
+     */
+     @Override
+     public boolean hasNext() {
+         return head != null;
+     }
 
-    //Specific location in the list
+     /**
+     * Method that returns the Next object in the LinkedList
+     * 
+     * @return
+     */
+     @Override
+     public Object next() {
+         return null;
+     }
+    
+
     /**
     * Method that adds a new node at a specific index
     *
@@ -204,29 +244,7 @@ public class MyDLL <T> implements ListADT, Iterator {
     }
 
     /**
-    * Method that checks if head of the list is null
-    * 
-    * @return true If the head is not null
-    */
-    @Override
-    public boolean hasNext() {
-        return head != null;
-    }
-
-// I dunno how to explain this
-    /**
-    * Method that checks if there is another object in the list
-    * 
-    * @return
-    */
-    @Override
-    public Object next() {
-        return null;
-    }
-
-    //At the end
-    /**
-    * Method that adds every value in holder to the top of the stack
+    * Method that adds an object to the end of a LinkedList
     *
     * @param holder An array that holds all the object to be added
     * @return The array containing the stack values in order
@@ -298,7 +316,6 @@ public class MyDLL <T> implements ListADT, Iterator {
         return current.data;
     }
 
-    //Remove at specific index
     /**
     * Method to look for a node with an index and remove it from the list
     *
@@ -331,7 +348,6 @@ public class MyDLL <T> implements ListADT, Iterator {
         return dataRemove;
     }
 
-    //Search for and remove an object
     /**
     * Method to look for a node with an object value and remove it from the list
     *
@@ -388,7 +404,7 @@ public class MyDLL <T> implements ListADT, Iterator {
     /**
     * Method to check if the list is empty or not
     * 
-    * @return The value to check if the list is empty or not
+    * @return true if the Linked List is null
     */
     @Override
     public boolean isEmpty() {
@@ -471,20 +487,27 @@ public class MyDLL <T> implements ListADT, Iterator {
         return array;
     }
 
-// I dunno how to explain this
     /**
-    * Method that
+    * Method that creates an Iterator so you can go thorough the contents of 
+    * the Linked List
     *
-    * @return 
+    * @return an Object of type utilities.Iterator 
     */
     public utilities.Iterator iterator() {
         return (utilities.Iterator) new DLLIterator();
     }
+    
+    /**
+     * 
+     * Class to create an Iterator object for DLLs
+     * @author Alex
+     * 
+     */
     private class DLLIterator implements Iterator<T> {
         private Node<T> current = head;
         private Node<T> last = null;
 
-        /**
+     /**
 	 * Method that checks if the iterator had any more objects in it
 	 * 
 	 * @return true If there is any objects left in the iterator
@@ -494,7 +517,7 @@ public class MyDLL <T> implements ListADT, Iterator {
             return current != null;
         }
         
-        /**
+     /**
 	 * Method that return whatever object the cursor is pointing at
 	 * 
 	 * @return The value in the array that the cusor is pointing at

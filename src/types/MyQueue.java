@@ -4,7 +4,6 @@ import java.util.NoSuchElementException;
 
 import utilities.Iterator;
 import utilities.QueueADT;
-import types.MyDLL;
 import types.MyDLL.*;
 import exceptions.EmptyQueueException;
 
@@ -24,6 +23,10 @@ public class MyQueue<E> implements QueueADT{
 	Node tail;
 	MyDLL dll;
 	
+	/**
+	 * Construcor for a MyQueue Object 
+	 * @param s is the max size of the Queue
+	 */
 	public MyQueue(int s) {
 		this.size = s;
 		this.dll = new MyDLL();
@@ -104,7 +107,7 @@ public class MyQueue<E> implements QueueADT{
 	}
 
 	/**
-	* Class to make an object of type iterator with the conents of a queue
+	* Method that makes an object of utilities.iterator 
 	*
 	* @exceptions NoSuchElementException
 	*/
@@ -112,6 +115,12 @@ public class MyQueue<E> implements QueueADT{
 	public Iterator<E> iterator() throws NoSuchElementException{
 		return new QueueIterator(this, this.size());
 	}
+	
+	/**
+	* Class to make an object of type iterator with the conents of a queue
+	*
+	* @exceptions NoSuchElementException
+	*/
 	private class QueueIterator implements Iterator<E> {
         private E[] queueArray;
 		private int current;
@@ -123,22 +132,22 @@ public class MyQueue<E> implements QueueADT{
         	this.length = length;
         }
 		
-	/**
-	* Method that checks if the iterator has any more objects in it
-	* 
-	* @return true if there is any objects left in the iterator
-	*/
+		/**
+		* Method that checks if the iterator has any more objects in it
+		* 
+		* @return true if there is any objects left in the iterator
+		*/
         @Override
         public boolean hasNext() {
             return this.current < this.length;
         }
 		
-	/**
-	* Method that returns whatever object the cursor is pointing at
-	* 
-	* @return The value in the array that the cursor is pointing at
-	* @exception NoSuchElementException
-	*/
+		/**
+		* Method that returns whatever object the cursor is pointing at
+		* 
+		* @return The value in the array that the cursor is pointing at
+		* @exception NoSuchElementException
+		*/
         @Override
         public E next() {
             if (!hasNext()) {
@@ -152,7 +161,7 @@ public class MyQueue<E> implements QueueADT{
 	@SuppressWarnings("unchecked")
 	
 	/**
- 	* Method to check if two stacks are equal in length and contents
+ 	* Method to check if two Queues are equal in length and contents
 	*
 	* @param that The queue is being compared to
 	* @return The value to check if the queues are equal or not

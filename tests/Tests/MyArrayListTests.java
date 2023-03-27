@@ -4,6 +4,11 @@ import org.junit.*;
 import types.MyArrayList;
 import static org.junit.Assert.*;
 
+/**
+ * Class to test methods in the MyArrayList class
+ * @author Alex, Migule
+ *
+ */
 public class MyArrayListTests {
     private static MyArrayList<String> testList;
 

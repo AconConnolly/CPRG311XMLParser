@@ -12,6 +12,11 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class to test methods in the MyStack class
+ * @author Alex, Miguel
+ *
+ */
 public class MyStackTests {
     private static MyStack<Integer> testStack;
 

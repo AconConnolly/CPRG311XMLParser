@@ -9,7 +9,7 @@ import utilities.StackADT;
 /**
  * Class to make an object of type MyStack
  * 
- * @author Matthew, Migule
+ * @author Migule, Matthew
  *
  * @param <E> allows you to make a stack of a specific type
  */
