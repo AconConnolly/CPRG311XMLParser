@@ -27,6 +27,15 @@ public class MyQueue<E> implements QueueADT{
 	}
 
 	@SuppressWarnings("unchecked")
+	
+	/**
+ 	* Method
+	*
+	* @param
+	* @return
+	* @exceptions
+ 	*/
+
 	@Override
 	public void enqueue(Object toAdd) throws NullPointerException {
 		if (toAdd == null) {
