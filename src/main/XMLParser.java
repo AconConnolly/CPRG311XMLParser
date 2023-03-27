@@ -18,16 +18,12 @@ public class XMLParser {
 		MyStack stack = new MyStack();
 		MyQueue errorQ = new MyQueue(100);
 		MyQueue extrasQ = new MyQueue(100);
-		//Dont like that i have to put size in there 
+		
+		//Start of the loop that will keep reading tell it hits the end of the file
 		while(file.hasNext()) {
-			//Read until subString at end = >
-			String tag = file.next();
-			while(!tag.substring(tag.length()-1).equals(">")) {
-				if(file.hasNext()) {
-					tag += " ";
-					tag +=file.next();
-				}
-			}	
+			String tag = file.nextLine();
+			tag = tag.trim();
+			
 			//Process the Tag
 			if(tag.charAt(1) =='/'){
 				String tagName = tag.substring(2, tag.indexOf('>'));
@@ -88,7 +84,6 @@ public class XMLParser {
 									popTellFind = popTellFind.substring(1, popTellFind.length()-1);
 								}
 							}
-							//errorQ.enqueue(popTellFind);
 						}
 						else {
 							extrasQ.enqueue(tagName);
