@@ -44,11 +44,9 @@ public class MyDLL <T> implements ListADT, Iterator {
     If the list is not empty, it creates a previous node and sets its previous node to the tail node, and the tails next node to current node.
     */
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method that adds a new node value in the end of the list
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @param data The value of the data being added to the list
     */
     public void insertAtEnd(T data) {
         Node<T> newNode = new Node<T>(data);
@@ -62,6 +60,11 @@ public class MyDLL <T> implements ListADT, Iterator {
         size++;
     }
 
+    /**
+    * Method that adds a new node value in the start of the list
+    *
+    * @param data The value of the data being added to the list
+    */
     public void insertAtFront(T data) {
         Node<T> newNode = new Node<T>();
         newNode.data = data;
@@ -80,11 +83,9 @@ public class MyDLL <T> implements ListADT, Iterator {
     IF more than one, it will delete the tail node and update the tail pointer to the previous node, and sets the previous node's pointer to null.
      */
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method that deletes the data at the end of the list
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @return The data being deleted in the list
     */
     public Node<T> deleteFromEnd() {
         if (tail == null) {
@@ -104,6 +105,12 @@ public class MyDLL <T> implements ListADT, Iterator {
             return deletedNode;
         }
     }
+    
+    /**
+    * Method that deletes the data at the beginning of the list
+    *
+    * @return The data being deleted in the list
+    */
     public Node<T> deleteFromFront() {
         if (head == null) {
             return null;
@@ -127,11 +134,7 @@ public class MyDLL <T> implements ListADT, Iterator {
     Method traverses the list from the head node and prints the data of each node.
      */
     /**
-    * Method that adds every value in holder to the top of the stack
-    *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * Method that prints every node in the list
     */
     public void printList() {
         Node<T> current = head;
@@ -143,12 +146,10 @@ public class MyDLL <T> implements ListADT, Iterator {
     }
 
     /**
-    * Method that adds every value in holder to the top of the stack
-    *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
-    */
+	 * Method to return the length of the list
+	 * 
+	 * @return The length of the stack
+	 */
     public int size() {
         return size;
     }
@@ -163,11 +164,13 @@ public class MyDLL <T> implements ListADT, Iterator {
 
     //Specific location in the list
     /**
-    * Method that adds every value in holder to the top of the stack
+    * Method that adds a new node at a specific index
     *
-    * @param holder An array that holds all the object to be added
-    * @return The array containing the stack values in order
-    * @exceptions NullPointerException If the holder is null
+    * @param index The position of where the new node will be added
+    * @param data The data inside the new node
+    * @return true if the new  node has been  added
+    * @exception NullPointerException If the data is null
+    * @exception IndexOutOfBoundsException If the index is out of bounds in the list
     */
     @Override
     public boolean add(int index, Object data) throws NullPointerException, IndexOutOfBoundsException {
