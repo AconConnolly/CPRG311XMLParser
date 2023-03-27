@@ -31,7 +31,7 @@ public class MyStack<E> implements StackADT {
 	 * 
 	 * @param toAdd The object to be added to the top of the stack
 	 * 
-	 * @exception NullPointerException of toAdd is null
+	 * @exception NullPointerException If toAdd is null
 	 */
 	@Override
 	public void push(Object toAdd) throws NullPointerException {
@@ -47,7 +47,7 @@ public class MyStack<E> implements StackADT {
 	 * 
 	 * @return The value of the object on the top of the stack
 	 * 
-	 * @exception EmptyStackException if the depth of the stack is 0
+	 * @exception EmptyStackException If the depth of the stack is 0
 	 */
 	@Override
 	public Object pop() throws EmptyStackException {
@@ -65,7 +65,7 @@ public class MyStack<E> implements StackADT {
 	 * 
 	 * @return The value of the object on the top of the stack
 	 * 
-	 * @exception EmptyStackException if the depth of the stack is 0
+	 * @exception EmptyStackException If the depth of the stack is 0
 	 */
 	@Override
 	public Object peek() throws EmptyStackException {
@@ -108,10 +108,9 @@ public class MyStack<E> implements StackADT {
 	/**
 	 * Method that adds every value in holder to the top of the stack
 	 * 
-	 * @param holder an array that holds all the object to be added
+	 * @param holder An array that holds all the objects to be added
 	 * @return The array containing the stack values in order
-	 * 
-	 * @exception NullPointerException if any values in the array are null
+	 * @exception NullPointerException If any values in the array are null
 	 */
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
@@ -123,8 +122,7 @@ public class MyStack<E> implements StackADT {
 	 * 
 	 * @param toFind The value of the object to check
 	 * @return The value to check if the stack contains the object or not
-	 * 
-	 * @exception NullPointerException if toFind is null
+	 * @exception NullPointerException If toFind is null
 	 */
 	@Override
 	public boolean contains(Object toFind) throws NullPointerException {
@@ -140,7 +138,7 @@ public class MyStack<E> implements StackADT {
 	 * Method to find the position of a specific object in a stack
 	 * 
 	 * @param toFind The value of the object to find
-	 * @return The position of the object in the stack -1 if its not there and the index if its found
+	 * @return The position of the object in the stack, -1 if its not there or the index if it's found
 	 */
 	@Override
 	public int search(Object toFind) {
@@ -164,7 +162,7 @@ public class MyStack<E> implements StackADT {
 	/**
 	 * Method to check if two stacks are equal in depth and contents
 	 * 
-	 * @param that if the stack to be comaped to
+	 * @param that The stack its being compared to
 	 * @return The value to check if the stacks are equal in depth and contents
 	 */
 	@Override
@@ -194,9 +192,9 @@ public class MyStack<E> implements StackADT {
 	}
 
 	/**
-	 * method to get an iterator that has everything in the stack
+	 * Method to get an iterator that has everything in the stack
 	 * 
-	 * @return an Iterator object containing the contents of the stack
+	 * @return An Iterator object containing the contents of the stack
 	 */
 	@Override
 	public utilities.Iterator iterator() {
@@ -218,7 +216,7 @@ public class MyStack<E> implements StackADT {
 		/**
 		 * Constructor to make an Iterator object 
 		 * 
-		 * @param array the contends of the stack
+		 * @param array The contents of the stack
 		 */
 		Iterator(MyArrayList array){
 			cursor = -1;
@@ -232,9 +230,9 @@ public class MyStack<E> implements StackADT {
 		}
 		
 		/**
-		 * method that checks if the iterator had any more objects in it
+		 * Method that checks if the iterator had any more objects in it
 		 * 
-		 * @return true if there is anything object left in the iterator
+		 * @return true If there is any objects left in the iterator
 		 */
 		@Override
 		public boolean hasNext() {
@@ -247,9 +245,10 @@ public class MyStack<E> implements StackADT {
 		}
 
 		/**
-		 * method the return whatever object the cursor is pointing at
+		 * Method that return whatever object the cursor is pointing at
 		 * 
-		 * @return the value in the array that the cusor is pointing at
+		 * @return The value in the array that the cusor is pointing at
+		 * @exceptions NoSuchElementException
 		 */
 		@Override
 		public Object next() throws NoSuchElementException {
