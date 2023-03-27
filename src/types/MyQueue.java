@@ -213,7 +213,7 @@ public class MyQueue<E> implements QueueADT{
 	/**
  	* Method to get the queue size
 	*
-	* @return The size of the queue
+	* @return The length of the queue
  	*/
 	@Override
 	public int size() {
