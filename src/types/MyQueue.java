@@ -104,12 +104,10 @@ public class MyQueue<E> implements QueueADT{
 	}
 
 	/**
- 	* Method
+	* Class to make an object of type iterator with the conents of a queue
 	*
-	* @param
-	* @return
-	* @exceptions
- 	*/
+	* @exceptions NoSuchElementException
+	*/
 	@Override
 	public Iterator<E> iterator() throws NoSuchElementException{
 		return new QueueIterator(this, this.size());
@@ -126,24 +124,21 @@ public class MyQueue<E> implements QueueADT{
         }
 		
 	/**
- 	* Method
-	*
-	* @param
-	* @return
-	* @exceptions
- 	*/
+	* Method that checks if the iterator has any more objects in it
+	* 
+	* @return true if there is any objects left in the iterator
+	*/
         @Override
         public boolean hasNext() {
             return this.current < this.length;
         }
 		
 	/**
- 	* Method
-	*
-	* @param
-	* @return
-	* @exceptions
- 	*/
+	* Method that returns whatever object the cursor is pointing at
+	* 
+	* @return The value in the array that the cursor is pointing at
+	* @exception NoSuchElementException
+	*/
         @Override
         public E next() {
             if (!hasNext()) {
@@ -157,11 +152,10 @@ public class MyQueue<E> implements QueueADT{
 	@SuppressWarnings("unchecked")
 	
 	/**
- 	* Method
+ 	* Method to check if two stacks are equal in length and contents
 	*
-	* @param
-	* @return
-	* @exceptions
+	* @param that The queue is being compared to
+	* @return The value to check if the queues are equal or not
  	*/
 	@Override
 	public boolean equals(QueueADT that) {
@@ -177,11 +171,9 @@ public class MyQueue<E> implements QueueADT{
 	}
 
 	/**
- 	* Method
+ 	* Method to make an array with all the values in a stack
 	*
-	* @param
-	* @return
-	* @exceptions
+	* @return The array containing the stack values in order
  	*/
 	@Override
 	public Object[] toArray() {
@@ -189,11 +181,11 @@ public class MyQueue<E> implements QueueADT{
 	}
 
 	/**
- 	* Method
+ 	* Method that adds every value in holder to the top of the stack
 	*
-	* @param
-	* @return
-	* @exceptions
+	* @param holder An array that holds all the object to be added
+	* @return The array containing the stack values in order
+	* @exceptions NullPointerException
  	*/
 	@Override
 	public Object[] toArray(Object[] holder) throws NullPointerException {
